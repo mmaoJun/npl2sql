@@ -23,7 +23,7 @@ spring:
     redis:
       host: localhost
       port: 6379
-      password:
+      password: 050407
       database: 0
       lettuce:
         pool:
@@ -70,6 +70,10 @@ sql-security:
   max-limit: 100
   query-timeout-seconds: 10
   max-retry: 2
+
+# 提示词模板配置
+prompt:
+  version: v1  # 对应 resources/prompts/ 目录下的 yml 文件名，如 v1.yml、v2.yml
 
 # Schema 缓存配置
 schema-cache:
