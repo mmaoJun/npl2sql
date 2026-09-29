@@ -147,3 +147,13 @@ examples:
       sql: "SELECT * FROM users WHERE name LIKE '%张%'"
     - question: 查询商品名类似'手机'的商品
       sql: "SELECT * FROM products WHERE name LIKE '%手机%'"
+
+# ========== 方言专属示例覆盖 ==========
+# 未列出的查询类型回退使用上方通用示例
+dialect_overrides:
+  postgresql:
+    TREND:
+      - question: 统计每月的订单数量趋势
+        sql: "SELECT to_char(created_at, 'YYYY-MM') AS month, COUNT(*) AS order_count FROM orders GROUP BY month ORDER BY month"
+      - question: 查询每天的销售额变化
+        sql: "SELECT created_at::date AS day, SUM(amount) AS daily_sales FROM orders GROUP BY day ORDER BY day"

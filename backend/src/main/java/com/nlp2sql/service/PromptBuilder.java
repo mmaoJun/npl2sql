@@ -1,11 +1,24 @@
 package com.nlp2sql.service;
 
 import com.nlp2sql.model.TableInfo;
+import org.springframework.ai.chat.messages.SystemMessage;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Prompt 构建服务。
+ *
+ * <p>将系统指令、压缩后的 Schema、Few-Shot 示例和用户问题拼装为完整的 LLM Prompt。
+ * 支持首次构建和重试构建（携带错误反馈）两种模式。
+ *
+ * @see SchemaCompressor
+ * @see QueryClassifier
+ * @see PromptTemplateService
+ */
 @Service
 public class PromptBuilder {
 
@@ -21,45 +34,69 @@ public class PromptBuilder {
         this.promptTemplate = promptTemplate;
     }
 
-    public String build(String nlInput, List<TableInfo> tables, String dialect) {
+    /**
+     * 构建首次查询的完整 Prompt。
+     *
+     * <p>拼装顺序：系统指令 → 压缩 Schema → Few-Shot 示例（最多 3 条）→ 用户问题。
+     *
+     * @param nlInput 用户自然语言输入
+     * @param tables  当前数据源的表结构列表
+     * @param dialect 数据库方言
+     * @return 包含 SystemMessage 和 UserMessage 的结构化 Prompt
+     */
+    public Prompt build(String nlInput, List<TableInfo> tables, String dialect) {
         QueryClassifier.QueryType queryType = queryClassifier.classify(nlInput);
 
-        StringBuilder prompt = new StringBuilder();
-        prompt.append(promptTemplate.getSystemPrompt(dialect)).append("\n");
+        String systemPrompt = promptTemplate.getSystemPrompt(dialect);
 
+        StringBuilder userContent = new StringBuilder();
         String schema = schemaCompressor.compress(tables, nlInput);
-        prompt.append(schema).append("\n\n");
+        userContent.append(schema).append("\n\n");
 
-        appendExamples(prompt, queryType, 3);
+        appendExamples(userContent, queryType, dialect, 3);
 
-        prompt.append("问题: ").append(nlInput).append("\n");
-        prompt.append("SQL:");
+        userContent.append("问题: ").append(nlInput).append("\n");
+        userContent.append("SQL:");
 
-        return prompt.toString();
+        return new Prompt(new SystemMessage(systemPrompt), new UserMessage(userContent.toString()));
     }
 
-    public String buildWithRetry(String nlInput, List<TableInfo> tables, String dialect,
+    /**
+     * 构建重试 Prompt，携带上次生成的 SQL 和错误反馈。
+     *
+     * <p>在首次 Prompt 基础上插入重试反馈段落，引导模型修正错误 SQL。
+     * Few-Shot 示例数量减少为 2 条以留出 Token 空间。
+     *
+     * @param nlInput      用户自然语言输入
+     * @param tables       当前数据源的表结构列表
+     * @param dialect      数据库方言
+     * @param previousSql  上次生成的 SQL
+     * @param errorMessage 校验或执行错误信息
+     * @return 包含错误反馈的结构化 Prompt
+     */
+    public Prompt buildWithRetry(String nlInput, List<TableInfo> tables, String dialect,
                                   String previousSql, String errorMessage) {
         QueryClassifier.QueryType queryType = queryClassifier.classify(nlInput);
 
-        StringBuilder prompt = new StringBuilder();
-        prompt.append(promptTemplate.getSystemPrompt(dialect)).append("\n");
+        String systemPrompt = promptTemplate.getSystemPrompt(dialect);
 
+        StringBuilder userContent = new StringBuilder();
         String schema = schemaCompressor.compress(tables, nlInput);
-        prompt.append(schema).append("\n\n");
+        userContent.append(schema).append("\n\n");
 
-        appendExamples(prompt, queryType, 2);
+        appendExamples(userContent, queryType, dialect, 2);
 
-        prompt.append(promptTemplate.getRetryFeedback(previousSql, errorMessage)).append("\n\n");
+        userContent.append(promptTemplate.getRetryFeedback(previousSql, errorMessage)).append("\n\n");
 
-        prompt.append("问题: ").append(nlInput).append("\n");
-        prompt.append("SQL:");
+        userContent.append("问题: ").append(nlInput).append("\n");
+        userContent.append("SQL:");
 
-        return prompt.toString();
+        return new Prompt(new SystemMessage(systemPrompt), new UserMessage(userContent.toString()));
     }
 
-    private void appendExamples(StringBuilder prompt, QueryClassifier.QueryType queryType, int maxCount) {
-        List<Map<String, String>> examples = queryClassifier.getFewShotExamples(queryType);
+    private void appendExamples(StringBuilder prompt, QueryClassifier.QueryType queryType,
+                                String dialect, int maxCount) {
+        List<Map<String, String>> examples = queryClassifier.getFewShotExamples(queryType, dialect);
         if (!examples.isEmpty()) {
             prompt.append("示例:\n");
             int count = Math.min(examples.size(), maxCount);
