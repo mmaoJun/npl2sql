@@ -1,39 +1,52 @@
 <template>
   <div class="login-page">
-    <div class="login-card">
-      <h2>NL2SQL 智能查询系统</h2>
-      <p class="login-subtitle">基于大语言模型的自然语言查询</p>
+    <div class="login-bg">
+      <div class="bg-grid"></div>
+      <div class="bg-glow bg-glow-1"></div>
+      <div class="bg-glow bg-glow-2"></div>
+    </div>
 
-      <el-tabs v-model="activeTab">
+    <div class="login-card">
+      <div class="card-header">
+        <div class="logo-mark">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 7h16M4 12h10M4 17h6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h2>NL2SQL</h2>
+        <p class="card-desc">基于大语言模型的自然语言查询系统</p>
+      </div>
+
+      <el-tabs v-model="activeTab" class="auth-tabs">
         <el-tab-pane label="登录" name="login">
-          <el-form :model="loginForm" @submit.prevent="handleLogin">
+          <el-form :model="loginForm" @submit.prevent="handleLogin" class="auth-form">
             <el-form-item>
-              <el-input v-model="loginForm.username" placeholder="用户名" prefix-icon="User" />
+              <el-input v-model="loginForm.username" placeholder="用户名" prefix-icon="User" size="large" />
             </el-form-item>
             <el-form-item>
               <el-input v-model="loginForm.password" type="password" placeholder="密码"
-                        prefix-icon="Lock" show-password @keyup.enter="handleLogin" />
+                        prefix-icon="Lock" show-password size="large" @keyup.enter="handleLogin" />
             </el-form-item>
-            <el-button type="primary" style="width: 100%" @click="handleLogin" :loading="loading">
+            <el-button type="primary" class="submit-btn" size="large" @click="handleLogin" :loading="loading">
               登录
             </el-button>
           </el-form>
         </el-tab-pane>
 
         <el-tab-pane label="注册" name="register">
-          <el-form :model="registerForm" @submit.prevent="handleRegister">
+          <el-form :model="registerForm" @submit.prevent="handleRegister" class="auth-form">
             <el-form-item>
-              <el-input v-model="registerForm.username" placeholder="用户名" prefix-icon="User" />
+              <el-input v-model="registerForm.username" placeholder="用户名" prefix-icon="User" size="large" />
             </el-form-item>
             <el-form-item>
               <el-input v-model="registerForm.password" type="password" placeholder="密码"
-                        prefix-icon="Lock" show-password />
+                        prefix-icon="Lock" show-password size="large" />
             </el-form-item>
             <el-form-item>
               <el-input v-model="registerForm.confirmPassword" type="password" placeholder="确认密码"
-                        prefix-icon="Lock" show-password @keyup.enter="handleRegister" />
+                        prefix-icon="Lock" show-password size="large" @keyup.enter="handleRegister" />
             </el-form-item>
-            <el-button type="primary" style="width: 100%" @click="handleRegister" :loading="loading">
+            <el-button type="primary" class="submit-btn" size="large" @click="handleRegister" :loading="loading">
               注册
             </el-button>
           </el-form>
@@ -104,27 +117,119 @@ async function handleRegister() {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.login-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.bg-glow-1 {
+  width: 500px;
+  height: 500px;
+  background: #6366f1;
+  top: -150px;
+  right: -100px;
+}
+
+.bg-glow-2 {
+  width: 400px;
+  height: 400px;
+  background: #7c3aed;
+  bottom: -100px;
+  left: -80px;
 }
 
 .login-card {
   width: 400px;
-  padding: 40px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  padding: 36px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+  position: relative;
+  z-index: 1;
 }
 
-.login-card h2 {
+.card-header {
   text-align: center;
-  color: #303133;
-  margin-bottom: 4px;
+  margin-bottom: 28px;
 }
 
-.login-subtitle {
-  text-align: center;
-  color: #909399;
+.logo-mark {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.3);
+}
+
+.card-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.card-desc {
   font-size: 13px;
-  margin-bottom: 24px;
+  color: #64748b;
+}
+
+.auth-tabs :deep(.el-tabs__header) {
+  margin-bottom: 20px;
+}
+
+.auth-tabs :deep(.el-tabs__nav-wrap::after) {
+  height: 1px;
+}
+
+.auth-tabs :deep(.el-tabs__active-bar) {
+  background-color: #4f46e5;
+}
+
+.auth-tabs :deep(.el-tabs__item.is-active) {
+  color: #4f46e5;
+}
+
+.auth-form .el-form-item {
+  margin-bottom: 18px;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
 }
 </style>

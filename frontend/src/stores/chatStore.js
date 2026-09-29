@@ -29,7 +29,8 @@ export const useChatStore = defineStore('chat', () => {
     loading.value = true
 
     try {
-      const response = await chat({ message, datasourceId })
+      const res = await chat({ message, datasourceId })
+      const response = res.data
 
       if (response.success) {
         addSystemMessage(

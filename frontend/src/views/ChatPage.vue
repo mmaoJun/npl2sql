@@ -1,36 +1,39 @@
 <template>
   <div class="chat-page">
     <div class="chat-header">
-      <DataSourceSelector
-        v-model="selectedDsId"
-        :data-sources="dsStore.dataSources"
-      />
-      <el-button text @click="chatStore.clearMessages()">
-        <el-icon><Delete /></el-icon>
-        清空对话
-      </el-button>
+      <div class="header-left">
+        <el-icon :size="18" color="var(--primary)"><Connection /></el-icon>
+        <DataSourceSelector
+          v-model="selectedDsId"
+          :data-sources="dsStore.dataSources"
+        />
+      </div>
+      <button class="clear-btn" @click="chatStore.clearMessages()" title="清空对话">
+        <el-icon :size="16"><Delete /></el-icon>
+        <span>清空</span>
+      </button>
     </div>
 
     <div class="chat-body">
       <div class="chat-messages" ref="messagesRef">
-        <div v-if="chatStore.messages.length === 0" class="empty-hint">
-          <el-empty description="输入自然语言问题开始查询">
-            <template #image>
-              <el-icon :size="60" color="#c0c4cc"><ChatDotRound /></el-icon>
-            </template>
-          </el-empty>
+        <div v-if="chatStore.messages.length === 0" class="empty-state">
+          <div class="empty-icon">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              <path d="M8 9h8M8 13h4"/>
+            </svg>
+          </div>
+          <h3 class="empty-title">开始对话</h3>
+          <p class="empty-desc">输入自然语言问题，自动生成 SQL 并查询结果</p>
           <div class="example-queries">
-            <p class="example-title">示例问题：</p>
-            <el-tag
+            <button
               v-for="q in exampleQueries"
               :key="q"
-              class="example-tag"
+              class="example-chip"
               @click="fillQuery(q)"
-              effect="plain"
-              cursor="pointer"
             >
               {{ q }}
-            </el-tag>
+            </button>
           </div>
         </div>
 
@@ -40,8 +43,10 @@
         </template>
 
         <div v-if="chatStore.loading" class="loading-indicator">
-          <el-icon class="is-loading"><Loading /></el-icon>
-          正在分析并生成 SQL...
+          <div class="loading-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span class="loading-text">正在分析并生成 SQL...</span>
         </div>
       </div>
     </div>
@@ -78,14 +83,11 @@ const exampleQueries = [
 ]
 
 function fillQuery(q) {
-  // 触发 ChatInput 填入文本
   handleSend(q)
 }
 
 async function handleSend(message) {
-  if (!selectedDsId.value) {
-    return
-  }
+  if (!selectedDsId.value) return
   await chatStore.sendMessage(message, selectedDsId.value)
   await nextTick()
   scrollToBottom()
@@ -112,15 +114,44 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   height: 100%;
+  background: var(--bg);
 }
 
 .chat-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
-  background: #fff;
-  border-bottom: 1px solid #e4e7ed;
+  padding: 12px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  z-index: 1;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.clear-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.clear-btn:hover {
+  color: var(--error);
+  border-color: var(--error);
+  background: var(--error-bg);
 }
 
 .chat-body {
@@ -131,49 +162,100 @@ onMounted(async () => {
 .chat-messages {
   height: 100%;
   overflow-y: auto;
-  padding: 20px;
+  padding: 24px 32px;
 }
 
-.empty-hint {
+.empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
-}
-
-.example-queries {
-  margin-top: 20px;
   text-align: center;
 }
 
-.example-title {
-  color: #909399;
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--primary-bg);
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.empty-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.empty-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+.example-queries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 560px;
+}
+
+.example-chip {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--text-secondary);
   font-size: 13px;
-  margin-bottom: 10px;
-}
-
-.example-tag {
-  margin: 4px;
   cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-sm);
 }
 
-.example-tag:hover {
-  color: var(--primary-color);
+.example-chip:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: var(--primary-bg);
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.12);
 }
 
 .loading-indicator {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  color: #909399;
-  font-size: 14px;
+  gap: 12px;
+  padding: 12px 0;
 }
 
-.chat-input-area {
-  padding: 16px 20px;
-  background: #fff;
-  border-top: 1px solid #e4e7ed;
+.loading-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+.loading-text {
+  font-size: 13px;
+  color: var(--text-muted);
 }
 </style>
