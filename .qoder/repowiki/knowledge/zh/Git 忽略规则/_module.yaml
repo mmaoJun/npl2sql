@@ -1,0 +1,41 @@
+schema_version: 1
+module_path: root
+title: Git 忽略规则
+scope:
+    - .gitignore
+source_files: []
+depends_on: []
+related_to: []
+kk_module_id: 937cdd97-fa45-4b27-9eb9-170009c902af
+kk_cards:
+    architecture_design:
+        id: 0a60f89a-b73d-44c2-91f6-fd565c6e51cb
+        title: Git 忽略规则
+    overview:
+        id: 1e434dc5-cbf5-44cb-a032-0f9ec35956ee
+        title: Git 忽略规则
+    build_system:
+        id: 755c26b9-6b79-4d50-ade4-ed1f5c6a23fa
+        title: 多语言项目构建体系（Maven + Vite，无 CI/Docker）
+    configuration_system:
+        id: 20b1c4ed-bcb4-403d-8d39-a4355a307645
+        title: Spring Boot YAML 配置与 Profile 分层系统
+    dependency_management:
+        id: 302299aa-3cec-4928-8653-5813d0eed8bb
+        title: 多语言依赖管理：Maven + Spring Boot BOM、Node/npm
+    error_handling:
+        id: a5128532-d756-43d0-9ba0-b1df5964e852
+        title: Spring Boot 统一业务异常处理体系
+    frontend_style:
+        id: c10b493c-b6b8-4802-8f88-6bf51d22f2d1
+        title: 前端样式体系：Element Plus + CSS 变量主题 + BEM 类名
+    logging_system:
+        id: a37a2023-b763-4d5d-97e3-5b8b6ce0104f
+        title: 基于 SLF4J + Spring Boot 的日志体系与审计记录
+kk_repo_cards:
+    - build_system
+    - configuration_system
+    - dependency_management
+    - error_handling
+    - frontend_style
+    - logging_system

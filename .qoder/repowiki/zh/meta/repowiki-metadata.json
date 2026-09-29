@@ -1,0 +1,1723 @@
+{
+  "wiki_repo": {
+    "id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+    "name": "nlp2sql",
+    "progress_status": "completed",
+    "wiki_present_status": "COMPLETED",
+    "recovery_checkpoint": "wiki_generation_completed",
+    "last_commit_id": "f0fb9851537ff67629707686c7c1b44d54078bea",
+    "last_commit_update": "2026-09-29T03:52:55Z",
+    "gmt_create": "2026-09-29T03:52:55Z",
+    "gmt_modified": "2026-09-29T03:52:55Z",
+    "extend_info": "{\"language\":\"zh\",\"active\":true,\"branch\":\"main\"}"
+  },
+  "wiki_catalogs": [
+    {
+      "id": "5ce00bd4-6b2f-4703-8bb1-0915546aab37",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "适配器模式实现",
+      "description": "adapter-pattern",
+      "prompt": "创建适配器模式实现的详细文档。深入解释 BaseDataSourceAdapter 的模板方法设计和通用功能封装，包括连接管理、事务处理、错误处理等核心抽象。详细说明 MySQLAdapter 对 MySQL 特定功能的实现和方言处理，包括 SQL 语法适配、数据类型映射、分页查询优化等。包含连接建立、查询执行、结果映射的核心流程代码示例。提供自定义适配器开发的完整指南，包括接口规范、配置要求、测试方法。讨论适配器间的依赖关系和生命周期管理，以及性能优化策略如连接池配置、批量操作优化等最佳实践。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/adapter/BaseDataSourceAdapter.java,backend/backend/src/main/java/com/nlp2sql/adapter/MySQLAdapter.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "e8a54c8f-7d06-4087-b478-e041bfd1594b",
+      "layer_level": 2,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/adapter/BaseDataSourceAdapter.java",
+        "backend/backend/src/main/java/com/nlp2sql/adapter/MySQLAdapter.java"
+      ]
+    },
+    {
+      "id": "96bcd859-4c58-4abf-b67c-053321ac65d5",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "查询分类器",
+      "description": "query-classification",
+      "prompt": "创建查询分类器的详细文档。深入解释自然语言查询的分类算法和规则匹配机制。详细说明不同类型的查询（SELECT、INSERT、UPDATE、DELETE）的识别逻辑。包含查询意图分析、实体提取和语义理解的技术实现。提供自定义分类规则的扩展方法和准确率优化策略。讨论查询预处理的清洗和标准化过程。包括具体的代码示例展示如何扩展新的查询类型和自定义分类规则。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/service/QueryClassifier.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "e0191c37-7ace-4957-b25a-4e36205b20af",
+      "layer_level": 2,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/service/QueryClassifier.java"
+      ]
+    },
+    {
+      "id": "a0bfd093-0542-46b2-b7d3-3f04c5db4c3e",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "项目概览",
+      "description": "project-overview",
+      "prompt": "为 NL2SQL 智能查询系统创建全面的项目概览内容。解释该系统的核心目标——将自然语言转换为 SQL 查询，通过对话式界面让非技术人员也能直接查询数据库。描述主要功能特性：NL2SQL 引擎、多数据源适配、JWT 认证、SQL 安全校验、元数据缓存等。说明技术栈选型（Spring Boot + Vue 3 + MySQL + Redis + Ollama/DashScope）。阐述系统架构分层（控制器层、服务层、适配器层）以及各组件之间的关系。提供系统上下文图和组件交互图。面向初学者介绍基本概念，同时为有经验的开发者提供足够的技术深度。使用与代码库一致的术语。包含实际应用场景和用例。",
+      "progress_status": "completed",
+      "dependent_files": "docs/technical_proposal.md,docs/user_manual.md,backend/backend/src/main/java/com/nlp2sql/Nlp2SqlApplication.java,frontend/frontend/src/App.vue",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "kk_dependent_files": [
+        "docs/technical_proposal.md",
+        "docs/user_manual.md",
+        "backend/backend/src/main/java/com/nlp2sql/Nlp2SqlApplication.java",
+        "frontend/frontend/src/App.vue"
+      ]
+    },
+    {
+      "id": "a724a802-af79-47f7-9320-e0246f54ea59",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "NL2SQL 引擎",
+      "description": "nl2sql-engine",
+      "prompt": "创建 NL2SQL 引擎的详细技术文档。深入解释自然语言到 SQL 的核心转换过程，包括查询分类、意图识别、上下文理解。详细说明 QueryClassifier 的分类算法和策略。解释与 AI 模型的集成方式和 prompt 工程策略。包含查询处理的完整流程图。提供不同类型查询的处理示例和优化建议。讨论准确率提升的方法和调优技巧。解释缓存机制和性能优化策略。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java,backend/backend/src/main/java/com/nlp2sql/service/QueryClassifier.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "6b7e6051-b55d-4b8a-acb2-8670ba03a9e6",
+      "layer_level": 3,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/QueryClassifier.java"
+      ]
+    },
+    {
+      "id": "b340fe5c-08b5-4d32-aeea-48225698c526",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "表结构设计",
+      "description": "schema-design",
+      "prompt": "创建表结构设计的详细文档。详细说明所有数据库表的字段定义、数据类型、约束条件。解释表之间的关系和引用完整性。包含主键、外键、唯一约束的设计原则。详细说明索引策略和查询优化。提供 ER 图和关系映射图。解释数据字典和字段含义的完整定义。讨论范式化设计和反范式化的权衡。",
+      "progress_status": "completed",
+      "dependent_files": "sql/init_backend.sql",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "5606600e-ed9a-4f9e-826b-a6a81b009c72",
+      "layer_level": 1,
+      "kk_dependent_files": [
+        "sql/init_backend.sql"
+      ]
+    },
+    {
+      "id": "b71d77d8-5f7f-4dd4-9e4d-5e2fef4f0e61",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "本地部署",
+      "description": "local-deployment",
+      "prompt": "创建本地开发环境部署的详细文档。详细说明 JDK 17、Node.js、MySQL 8.0、Redis 等依赖的安装和配置步骤。解释 Maven 构建项目的命令和 Node 包管理的配置。包含后端 Spring Boot 服务器启动和前端 Vite 开发服务器的启动命令。详细说明数据库初始化脚本的执行和数据准备。提供 IDE（IntelliJ IDEA、VS Code）的配置建议和调试环境的设置。包含常用开发工具链的配置，如代码格式化、Git 钩子等。详细说明热重载和断点调试的使用方法。包含常见问题的排查和解决方案，如端口冲突、依赖安装失败等。",
+      "progress_status": "completed",
+      "dependent_files": "backend/pom.xml,frontend/package.json",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "121145f7-751d-4bff-a045-2a8ef5875af8",
+      "layer_level": 1,
+      "kk_dependent_files": [
+        "backend/pom.xml",
+        "frontend/package.json"
+      ]
+    },
+    {
+      "id": "b9dd23ae-9be4-453c-b358-6b0e841ae5bd",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "控制器组件",
+      "description": "controller-components",
+      "prompt": "创建控制器组件的详细文档。解释 Spring MVC 控制器的设计和职责划分。详细介绍每个控制器的功能：AuthController（认证）、ChatController（聊天查询）、DataSourceController（数据源管理）、MetadataController（元数据管理）。说明请求处理流程、参数验证、响应格式化。包含具体的接口示例和错误处理机制。解释与业务层的交互模式。提供 HTTP 请求/响应的完整示例，包括状态码和错误信息格式。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/controller/AuthController.java,backend/backend/src/main/java/com/nlp2sql/controller/ChatController.java,backend/backend/src/main/java/com/nlp2sql/controller/DataSourceController.java,backend/backend/src/main/java/com/nlp2sql/controller/MetadataController.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "05e422e6-aba7-4a26-87fa-d31317b3a974",
+      "layer_level": 2,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/controller/AuthController.java",
+        "backend/backend/src/main/java/com/nlp2sql/controller/ChatController.java",
+        "backend/backend/src/main/java/com/nlp2sql/controller/DataSourceController.java",
+        "backend/backend/src/main/java/com/nlp2sql/controller/MetadataController.java"
+      ]
+    },
+    {
+      "id": "bc4f3c54-1fee-450b-8b47-0299ac29908d",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "聊天组件",
+      "description": "chat-components",
+      "prompt": "创建聊天相关组件的详细文档。深入解释 ChatInput 组件的用户输入处理、键盘事件、自动完成和发送机制。详细说明 ChatMessage 组件的消息渲染、Markdown 支持、代码高亮和复制功能。解释 ChatPage 页面的整体布局、消息流管理和实时交互。包含 WebSocket 连接处理和消息队列机制。提供聊天界面的用户体验优化和性能调优方法。面向前端开发者提供对话式界面的完整实现方案。",
+      "progress_status": "completed",
+      "dependent_files": "frontend/frontend/src/components/ChatInput.vue,frontend/frontend/src/components/ChatMessage.vue,frontend/frontend/src/views/ChatPage.vue",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "a74c8d1c-503a-4cb6-b082-cf7b60bb3d0d",
+      "layer_level": 2,
+      "kk_dependent_files": [
+        "frontend/frontend/src/components/ChatInput.vue",
+        "frontend/frontend/src/components/ChatMessage.vue",
+        "frontend/frontend/src/views/ChatPage.vue"
+      ]
+    },
+    {
+      "id": "c5fa2c2a-4e73-442d-b8b6-5f2c57678e35",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "架构总览",
+      "description": "architecture-overview",
+      "prompt": "创建系统架构总览文档。展示高层级系统结构，包括前后端分离架构、微服务组件划分。描述技术栈选择和版本兼容性。提供系统上下文图，显示用户、浏览器、后端服务、数据库、缓存、AI 模型之间的交互关系。说明部署拓扑和环境要求。解释核心设计理念：模块化、可扩展性、安全性。概述主要组件的职责和协作方式。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/Nlp2SqlApplication.java,frontend/frontend/src/App.vue",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "layer_level": 1,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/Nlp2SqlApplication.java",
+        "frontend/frontend/src/App.vue"
+      ]
+    },
+    {
+      "id": "d5f78949-63de-46b8-86e7-1111cb98aa05",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "认证接口",
+      "description": "auth-api",
+      "prompt": "创建认证相关的 API 接口文档。详细说明用户注册、登录、登出等接口的请求格式和响应结构。解释 JWT 令牌的获取、刷新和验证流程。包含密码加密、用户验证、权限检查的实现细节。提供认证失败的错误处理和安全最佳实践。包含客户端认证的完整示例代码。记录所有 HTTP 端点的 URL 模式、请求方法、请求头、请求体和响应体格式，包括状态码和错误码定义。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/controller/AuthController.java,backend/backend/src/main/java/com/nlp2sql/security/JwtTokenProvider.java,backend/backend/src/main/java/com/nlp2sql/service/AuthService.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "layer_level": 1,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/controller/AuthController.java",
+        "backend/backend/src/main/java/com/nlp2sql/security/JwtTokenProvider.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/AuthService.java"
+      ]
+    },
+    {
+      "id": "e0191c37-7ace-4957-b25a-4e36205b20af",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "NL2SQL 核心引擎",
+      "description": "nl2sql-engine",
+      "prompt": "创建 NL2SQL 核心引擎的详细文档。深入解释自然语言到 SQL 的转换流程，包括 QueryClassifier 的查询分类机制、PromptBuilder 的动态提示词构建和 PromptTemplateService 的模板管理。详细说明 AI 模型集成策略和 SQL 生成优化。包含 few-shot learning 的实现原理和上下文压缩技术。提供自定义提示词模板的开发指南和性能调优方法。讨论多模型支持（Ollama/DashScope）的配置和切换机制。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java,backend/backend/src/main/java/com/nlp2sql/service/PromptBuilder.java,backend/backend/src/main/java/com/nlp2sql/service/QueryClassifier.java,backend/backend/src/main/java/com/nlp2sql/service/PromptTemplateService.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "layer_level": 1,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/PromptBuilder.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/QueryClassifier.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/PromptTemplateService.java"
+      ]
+    },
+    {
+      "id": "e17e9873-b505-461e-a7a0-d21011a04f45",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "Vue 应用结构",
+      "description": "vue-application-structure",
+      "prompt": "创建 Vue 应用结构的详细文档。解释应用的入口文件组织和全局配置。详细说明路由配置和页面组织结构。解释插件引入和全局服务注册。包含应用的生命周期管理和初始化流程。提供项目目录组织的最佳实践和规范。讨论应用的性能优化和打包配置。面向前端开发者提供 Vue 3 + Vite 项目的架构设计和开发规范指导。",
+      "progress_status": "completed",
+      "dependent_files": "frontend/frontend/src/App.vue,frontend/frontend/src/main.js,frontend/frontend/src/router/index.js",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "layer_level": 1,
+      "kk_dependent_files": [
+        "frontend/frontend/src/App.vue",
+        "frontend/frontend/src/main.js",
+        "frontend/frontend/src/router/index.js"
+      ]
+    },
+    {
+      "id": "05009aa6-5e21-4fd0-95f4-da5718cbd7e3",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "数据展示组件",
+      "description": "data-display-components",
+      "prompt": "创建数据展示组件的详细文档。深入解释 ResultTable 组件的大数据量表格渲染、虚拟滚动、分页加载和导出功能。详细说明 SchemaExplorer 组件的树形结构展示、搜索过滤和节点选择机制。包含表格的排序、筛选、聚合计算等高级功能。提供大数据可视化的性能优化技巧和内存管理策略。讨论响应式布局和移动端适配方案。面向前端开发者提供高效数据展示的组件开发指南。",
+      "progress_status": "completed",
+      "dependent_files": "frontend/frontend/src/components/ResultTable.vue,frontend/frontend/src/components/SchemaExplorer.vue",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "a74c8d1c-503a-4cb6-b082-cf7b60bb3d0d",
+      "layer_level": 2,
+      "order": 1,
+      "kk_dependent_files": [
+        "frontend/frontend/src/components/ResultTable.vue",
+        "frontend/frontend/src/components/SchemaExplorer.vue"
+      ]
+    },
+    {
+      "id": "05e422e6-aba7-4a26-87fa-d31317b3a974",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "组件设计",
+      "description": "component-design",
+      "prompt": "创建组件设计文档。详细描述各个核心组件的设计思路和实现细节。包括控制器组件的职责划分、服务组件的业务逻辑封装、适配器组件的数据源抽象。解释组件间的依赖关系和调用关系。说明组件的生命周期管理和资源管理。提供组件交互序列图。讨论组件的可测试性和可复用性设计。包含具体的代码示例展示组件的使用方法。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/controller/,backend/backend/src/main/java/com/nlp2sql/service/,backend/backend/src/main/java/com/nlp2sql/adapter/",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "layer_level": 1,
+      "order": 1,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/controller/",
+        "backend/backend/src/main/java/com/nlp2sql/service/",
+        "backend/backend/src/main/java/com/nlp2sql/adapter/"
+      ]
+    },
+    {
+      "id": "1d1b22d4-fbee-4a44-84f7-2bbbc64e1abe",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "聊天查询接口",
+      "description": "chat-api",
+      "prompt": "创建聊天查询相关的 API 接口文档。详细说明自然语言查询的提交、处理、进度跟踪和结果获取接口。解释查询参数的格式、约束和验证规则。包含查询结果的多种格式支持和分页机制。提供查询历史的查询和管理接口。包含流式响应的实现和客户端处理示例。讨论查询性能优化和并发控制。记录所有 HTTP 端点的 URL 模式、请求方法、请求头、请求体和响应体格式，包括状态码和错误码定义。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/controller/ChatController.java,backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java,backend/backend/src/main/java/com/nlp2sql/model/dto/ChatRequest.java,backend/backend/src/main/java/com/nlp2sql/model/dto/ChatResponse.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "layer_level": 1,
+      "order": 1,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/controller/ChatController.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java",
+        "backend/backend/src/main/java/com/nlp2sql/model/dto/ChatRequest.java",
+        "backend/backend/src/main/java/com/nlp2sql/model/dto/ChatResponse.java"
+      ]
+    },
+    {
+      "id": "2c955894-c572-4c94-9eab-ad2277834a25",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "快速开始",
+      "description": "getting-started",
+      "prompt": "创建 NL2SQL 系统的快速开始指南。详细说明环境要求（JDK 17+、Node.js 18+、MySQL 8.0、Redis 7.x、Ollama 或 DashScope API）。提供完整的安装步骤：后端依赖安装、数据库初始化、前端依赖安装。包含详细的配置说明：application.yml 配置项、数据库连接配置、AI 模型配置（Ollama 和 DashScope 两种模式）。提供启动命令和验证步骤。包含首次使用的完整流程：注册账号、配置数据源、执行第一个自然语言查询。解决常见的环境搭建问题。确保新手能够独立部署并运行系统。",
+      "progress_status": "completed",
+      "dependent_files": "backend/pom.xml,backend/src/main/resources/application.yml,backend/src/main/resources/application-ollama.yml,sql/init_backend.sql,sql/sample_data/mysql_sample.sql,frontend/package.json,frontend/vite.config.js",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "order": 1,
+      "kk_dependent_files": [
+        "backend/pom.xml",
+        "backend/src/main/resources/application.yml",
+        "backend/src/main/resources/application-ollama.yml",
+        "sql/init_backend.sql",
+        "sql/sample_data/mysql_sample.sql",
+        "frontend/package.json",
+        "frontend/vite.config.js"
+      ]
+    },
+    {
+      "id": "3f420d76-287c-4a0a-bb7b-34fbe9f36f70",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "提示词工程",
+      "description": "prompt-engineering",
+      "prompt": "创建提示词工程的详细文档。深入解释 PromptBuilder 的动态提示词构建算法和上下文组装机制。详细说明 PromptTemplateService 的模板管理系统和版本控制。包含 few-shot learning 示例的设计原则和最佳实践。提供外部 YAML 模板文件的结构和配置方法。讨论提示词优化技巧和效果评估指标。包括具体的模板设计模式和性能调优建议。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/service/PromptBuilder.java,backend/backend/src/main/java/com/nlp2sql/service/PromptTemplateService.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "e0191c37-7ace-4957-b25a-4e36205b20af",
+      "layer_level": 2,
+      "order": 1,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/service/PromptBuilder.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/PromptTemplateService.java"
+      ]
+    },
+    {
+      "id": "6a7ab1a4-4177-46a2-9cab-b6969fa7fffb",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "数据迁移",
+      "description": "data-migration",
+      "prompt": "创建数据迁移的详细文档。详细说明数据库初始化脚本的执行顺序和依赖关系。解释版本控制和变更管理策略。包含样本数据的插入和测试数据准备。详细说明回滚脚本的编写和执行流程。提供数据迁移的工具链和自动化脚本。讨论生产环境的迁移策略和风险控制。包含数据验证和质量检查的方法。",
+      "progress_status": "completed",
+      "dependent_files": "sql/init_backend.sql,sql/sample_data/mysql_sample.sql",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "5606600e-ed9a-4f9e-826b-a6a81b009c72",
+      "layer_level": 1,
+      "order": 1,
+      "kk_dependent_files": [
+        "sql/init_backend.sql",
+        "sql/sample_data/mysql_sample.sql"
+      ]
+    },
+    {
+      "id": "6b7e6051-b55d-4b8a-acb2-8670ba03a9e6",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "服务组件",
+      "description": "service-components",
+      "prompt": "创建服务组件的详细文档。解释业务逻辑层的组件设计和职责。详细介绍核心服务：NL2SQLEngine（NL2SQL 引擎）、PromptBuilder（提示词构建器）、SQLGenerator（SQL 生成器）、MetadataService（元数据服务）、AuditService（审计服务）、AuthService（认证服务）。说明服务的业务流程编排、异常处理、事务管理。包含服务间调用的时序图。提供具体的使用示例和最佳实践。讨论服务间的依赖关系和数据流转。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java,backend/backend/src/main/java/com/nlp2sql/service/PromptBuilder.java,backend/backend/src/main/java/com/nlp2sql/service/SQLGenerator.java,backend/backend/src/main/java/com/nlp2sql/service/MetadataService.java,backend/backend/src/main/java/com/nlp2sql/service/AuditService.java,backend/backend/src/main/java/com/nlp2sql/service/AuthService.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "05e422e6-aba7-4a26-87fa-d31317b3a974",
+      "layer_level": 2,
+      "order": 1,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/PromptBuilder.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/SQLGenerator.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/MetadataService.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/AuditService.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/AuthService.java"
+      ]
+    },
+    {
+      "id": "a486d5ae-b00e-4abd-acfd-716f1cc61ef6",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "提示词系统",
+      "description": "prompt-system",
+      "prompt": "创建提示词系统的详细文档。解释 PromptBuilder 的动态提示词构建机制，包括 few-shot 学习、上下文压缩、schema 注入等技术。详细说明 PromptTemplateService 的模板管理机制和版本控制。解释提示词的优化策略和效果评估方法。包含不同场景下的提示词示例和最佳实践。提供提示词调试和优化的工具和方法。讨论提示词版本管理和回滚机制。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/service/PromptBuilder.java,backend/backend/src/main/java/com/nlp2sql/service/PromptTemplateService.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "6b7e6051-b55d-4b8a-acb2-8670ba03a9e6",
+      "layer_level": 3,
+      "order": 1,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/service/PromptBuilder.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/PromptTemplateService.java"
+      ]
+    },
+    {
+      "id": "c04ca4a6-fe6b-4444-a5b8-464bb2524edb",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "生产部署",
+      "description": "production-deployment",
+      "prompt": "创建生产环境部署的详细文档。详细说明 Docker 镜像的构建配置和多阶段构建优化。解释 Kubernetes YAML 清单文件的编写，包括 Deployment、Service、ConfigMap、Secret 等资源对象。包含 Nginx 反向代理的配置和负载均衡策略。详细说明环境变量管理和配置中心的使用。提供监控栈（Prometheus、Grafana）的集成配置和告警规则设置。包含日志收集（ELK/EFK）和集中式日志管理方案。详细说明性能优化配置，包括 JVM 参数调优、连接池配置、缓存策略等。讨论安全加固措施，如 SSL/TLS 证书配置、网络安全策略、访问控制等。包含滚动更新、蓝绿部署和灰度发布的实施策略。",
+      "progress_status": "completed",
+      "dependent_files": "backend/src/main/resources/application.yml,frontend/vite.config.js",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "121145f7-751d-4bff-a045-2a8ef5875af8",
+      "layer_level": 1,
+      "order": 1,
+      "kk_dependent_files": [
+        "backend/src/main/resources/application.yml",
+        "frontend/vite.config.js"
+      ]
+    },
+    {
+      "id": "d35385c0-dfd2-48ec-aa2a-b076fdbde6e1",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "工厂与注册机制",
+      "description": "factory-registration",
+      "prompt": "创建工厂与注册机制的详细文档。深入解释 DataSourceFactory 的适配器创建流程和注册表管理，包括静态注册、动态加载、版本管理等机制。详细说明 Controller 层的数据源 CRUD 操作和业务验证逻辑，包括连接测试、权限校验、数据加密等安全考虑。包含动态加载、热更新和配置管理的实现方案，支持运行时添加新数据源类型。提供插件化架构的扩展点和 SPI 机制设计，说明如何扩展新的数据库支持。讨论并发安全和线程池管理策略，包括连接池监控、资源清理、故障恢复等生产环境关键特性。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/adapter/DataSourceFactory.java,backend/backend/src/main/java/com/nlp2sql/controller/DataSourceController.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "e8a54c8f-7d06-4087-b478-e041bfd1594b",
+      "layer_level": 2,
+      "order": 1,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/adapter/DataSourceFactory.java",
+        "backend/backend/src/main/java/com/nlp2sql/controller/DataSourceController.java"
+      ]
+    },
+    {
+      "id": "dbbb20ec-45db-45bf-a71b-ff334362d0a6",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "状态管理",
+      "description": "state-management",
+      "prompt": "创建状态管理的详细文档。深入解释 Pinia store 的设计和模块化组织。详细说明 chatStore 的对话状态管理和消息处理逻辑。解释 datasourceStore 的数据源状态同步和缓存机制。包含状态持久化、异步操作处理和错误状态管理。提供状态调试工具和开发时监控的方法。讨论状态优化的最佳实践。面向前端开发者提供复杂状态管理的实现模式和性能优化技巧。",
+      "progress_status": "completed",
+      "dependent_files": "frontend/frontend/src/stores/chatStore.js,frontend/frontend/src/stores/datasourceStore.js",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "layer_level": 1,
+      "order": 1,
+      "kk_dependent_files": [
+        "frontend/frontend/src/stores/chatStore.js",
+        "frontend/frontend/src/stores/datasourceStore.js"
+      ]
+    },
+    {
+      "id": "e8a54c8f-7d06-4087-b478-e041bfd1594b",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "数据源适配器",
+      "description": "data-source-adapters",
+      "prompt": "创建数据源适配器系统的详细文档。深入解释基于策略模式的数据源抽象设计，包括 BaseDataSourceAdapter 的模板方法实现和 MySQLAdapter 的具体实现。详细说明 DataSourceFactory 的工厂模式和适配器注册机制。包含连接池配置、事务管理和性能优化策略。提供新数据源适配器的开发指南和测试方法。讨论分布式环境下的连接管理和故障转移机制。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/adapter/BaseDataSourceAdapter.java,backend/backend/src/main/java/com/nlp2sql/adapter/MySQLAdapter.java,backend/backend/src/main/java/com/nlp2sql/adapter/DataSourceFactory.java,backend/backend/src/main/java/com/nlp2sql/controller/DataSourceController.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "layer_level": 1,
+      "order": 1,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/adapter/BaseDataSourceAdapter.java",
+        "backend/backend/src/main/java/com/nlp2sql/adapter/MySQLAdapter.java",
+        "backend/backend/src/main/java/com/nlp2sql/adapter/DataSourceFactory.java",
+        "backend/backend/src/main/java/com/nlp2sql/controller/DataSourceController.java"
+      ]
+    },
+    {
+      "id": "000963d9-087a-4d9b-8982-2147c2b33ca3",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "数据管理服务",
+      "description": "data-management-services",
+      "prompt": "创建数据管理服务的详细文档。详细介绍 MetadataService（元数据服务）的缓存策略和 Redis 集成。解释 AuditService（审计服务）的日志记录机制和性能监控。说明 AuthService（认证服务）的用户管理、权限控制和会话管理。包含各服务的 API 接口和使用示例。提供配置选项和性能调优建议。讨论数据一致性保证和事务处理。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/service/MetadataService.java,backend/backend/src/main/java/com/nlp2sql/service/AuditService.java,backend/backend/src/main/java/com/nlp2sql/service/AuthService.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "6b7e6051-b55d-4b8a-acb2-8670ba03a9e6",
+      "layer_level": 3,
+      "order": 2,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/service/MetadataService.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/AuditService.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/AuthService.java"
+      ]
+    },
+    {
+      "id": "33a7c711-c107-4296-85de-73d633b01b4d",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "数据源接口",
+      "description": "datasource-api",
+      "prompt": "创建数据源管理相关的 API 接口文档。详细说明数据源的增删改查接口，包括连接测试、健康检查、配置验证等功能。解释数据源类型的支持和扩展机制。包含敏感信息的安全处理和加密存储。提供批量操作和导入导出的接口。包含连接池管理和故障转移的处理逻辑。记录所有 HTTP 端点的 URL 模式、请求方法、请求头、请求体和响应体格式，包括状态码和错误码定义。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/controller/DataSourceController.java,backend/backend/src/main/java/com/nlp2sql/service/DataSourceService.java,backend/backend/src/main/java/com/nlp2sql/model/dto/DataSourceDTO.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "layer_level": 1,
+      "order": 2,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/controller/DataSourceController.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/DataSourceService.java",
+        "backend/backend/src/main/java/com/nlp2sql/model/dto/DataSourceDTO.java"
+      ]
+    },
+    {
+      "id": "4ec37381-2cf4-4609-a5f3-c5d29927a2e3",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "适配器组件",
+      "description": "adapter-components",
+      "prompt": "创建适配器组件的详细文档。解释策略模式在数据源适配中的实现，包括 BaseDataSourceAdapter 的基础功能和 MySQLAdapter 的具体实现。详细说明 DataSourceFactory 的工厂模式和适配器选择机制。解释如何扩展现有适配器或添加新的数据源支持。包含适配器接口的完整定义和使用示例。提供自定义适配器的开发指南和最佳实践。讨论连接池管理和资源释放机制。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/adapter/BaseDataSourceAdapter.java,backend/backend/src/main/java/com/nlp2sql/adapter/MySQLAdapter.java,backend/backend/src/main/java/com/nlp2sql/adapter/DataSourceFactory.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "05e422e6-aba7-4a26-87fa-d31317b3a974",
+      "layer_level": 2,
+      "order": 2,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/adapter/BaseDataSourceAdapter.java",
+        "backend/backend/src/main/java/com/nlp2sql/adapter/MySQLAdapter.java",
+        "backend/backend/src/main/java/com/nlp2sql/adapter/DataSourceFactory.java"
+      ]
+    },
+    {
+      "id": "6d860ad6-71d8-42ae-84e0-9811ee1001f2",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "数据访问层",
+      "description": "database-layer",
+      "prompt": "创建数据访问层的详细文档。深入解释 MyBatis-Plus 的配置和 ORM 映射策略。详细说明各 Mapper 接口的查询优化和批量操作实现。包含实体模型的设计规范和字段映射规则。提供复杂查询、分页查询和事务管理的最佳实践。讨论数据库连接池配置和性能调优方法。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/mapper/AuditLogMapper.java,backend/backend/src/main/java/com/nlp2sql/mapper/UserMapper.java,backend/backend/src/main/java/com/nlp2sql/model/AuditLog.java,backend/backend/src/main/java/com/nlp2sql/model/User.java,backend/backend/src/main/java/com/nlp2sql/config/MyBatisPlusConfig.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "layer_level": 1,
+      "order": 2,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/mapper/AuditLogMapper.java",
+        "backend/backend/src/main/java/com/nlp2sql/mapper/UserMapper.java",
+        "backend/backend/src/main/java/com/nlp2sql/model/AuditLog.java",
+        "backend/backend/src/main/java/com/nlp2sql/model/User.java",
+        "backend/backend/src/main/java/com/nlp2sql/config/MyBatisPlusConfig.java"
+      ]
+    },
+    {
+      "id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "系统架构",
+      "description": "system-architecture",
+      "prompt": "创建 NL2SQL 系统的架构文档。描述整体系统设计思路，包括分层架构（表现层、业务层、数据访问层）和各层的职责划分。详细解释核心架构模式：策略模式（数据源适配器）、工厂模式（适配器创建）、模板方法模式（基础适配器类）。说明组件间的交互关系和数据流向，从用户输入到 SQL 生成再到结果返回的完整流程。阐述关键设计决策和技术权衡。包含系统边界定义、外部依赖关系、扩展点设计。提供架构图和数据流图。讨论可扩展性、可维护性和性能考虑。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/Nlp2SqlApplication.java,backend/backend/src/main/java/com/nlp2sql/controller/ChatController.java,backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java,backend/backend/src/main/java/com/nlp2sql/adapter/BaseDataSourceAdapter.java,frontend/frontend/src/App.vue",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "order": 2,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/Nlp2SqlApplication.java",
+        "backend/backend/src/main/java/com/nlp2sql/controller/ChatController.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java",
+        "backend/backend/src/main/java/com/nlp2sql/adapter/BaseDataSourceAdapter.java",
+        "frontend/frontend/src/App.vue"
+      ]
+    },
+    {
+      "id": "a74c8d1c-503a-4cb6-b082-cf7b60bb3d0d",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "核心组件",
+      "description": "core-components",
+      "prompt": "创建核心 UI 组件的详细文档。深入解释各个组件的设计模式、props 接口、事件处理和内部状态管理。详细说明 ChatInput 的输入处理和自动完成功能。解释 ChatMessage 的消息渲染和交互逻辑。包含 ResultTable 的数据表格展示和排序筛选功能。提供 SchemaExplorer 的数据库结构浏览和选择机制。包含组件的样式定制和主题适配。讨论组件的可复用性和组合模式。面向前端开发者提供高质量的组件开发指南和最佳实践。",
+      "progress_status": "completed",
+      "dependent_files": "frontend/frontend/src/components/ChatInput.vue,frontend/frontend/src/components/ChatMessage.vue,frontend/frontend/src/components/ResultTable.vue,frontend/frontend/src/components/SchemaExplorer.vue",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "layer_level": 1,
+      "order": 2,
+      "kk_dependent_files": [
+        "frontend/frontend/src/components/ChatInput.vue",
+        "frontend/frontend/src/components/ChatMessage.vue",
+        "frontend/frontend/src/components/ResultTable.vue",
+        "frontend/frontend/src/components/SchemaExplorer.vue"
+      ]
+    },
+    {
+      "id": "e0f5a8ea-4d66-404f-a481-71b74b116c18",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "数据流设计",
+      "description": "data-flow-design",
+      "prompt": "创建数据流设计的详细文档。详细描述从用户输入到 SQL 执行结果返回的完整数据流转过程。包括请求路由、参数传递、数据转换、缓存处理、安全校验等环节。解释关键数据对象在不同层间的传递和转换。提供数据流图和状态转换图。说明异步处理、错误传播、事务边界等关键设计点。包含性能优化和数据一致性保证机制。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java,backend/backend/src/main/java/com/nlp2sql/security/SqlSecurityChecker.java,backend/backend/src/main/java/com/nlp2sql/adapter/DataSourceFactory.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "layer_level": 1,
+      "order": 2,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/service/NL2SQLEngine.java",
+        "backend/backend/src/main/java/com/nlp2sql/security/SqlSecurityChecker.java",
+        "backend/backend/src/main/java/com/nlp2sql/adapter/DataSourceFactory.java"
+      ]
+    },
+    {
+      "id": "e5a12c62-3da5-41ce-a551-64515955b28f",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "模型集成",
+      "description": "model-integration",
+      "prompt": "创建模型集成的详细文档。深入解释 ChatModelPrimarySelector 的多模型选择策略和负载均衡机制。详细说明 Ollama 和 DashScope 两种模型的配置和使用差异。包含模型调用重试、超时处理和错误恢复机制。提供自定义模型适配器的开发指南和集成方法。讨论模型性能监控和成本优化策略。包括具体的配置示例和故障排查指南。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/config/ChatModelPrimarySelector.java,backend/backend/src/main/resources/application.yml,backend/backend/src/main/resources/application-ollama.yml",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "e0191c37-7ace-4957-b25a-4e36205b20af",
+      "layer_level": 2,
+      "order": 2,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/config/ChatModelPrimarySelector.java",
+        "backend/backend/src/main/resources/application.yml",
+        "backend/backend/src/main/resources/application-ollama.yml"
+      ]
+    },
+    {
+      "id": "002e400e-f9dd-4cf1-aac3-155890e02e6b",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "API 集成",
+      "description": "api-integration",
+      "prompt": "创建 API 集成的详细文档。深入解释 Axios 客户端的封装和配置，包括请求拦截器、响应拦截器、错误处理机制。详细说明 API 端点的组织方式和版本管理策略。包含请求重试、超时处理、取消请求等高级功能。提供 Mock 数据和服务端代理的配置方法。讨论 API 调用的性能优化和缓存策略。包含接口测试和调试的最佳实践。面向前端开发者提供健壮的 HTTP 通信层设计方案。",
+      "progress_status": "completed",
+      "dependent_files": "frontend/frontend/src/api/client.js,frontend/frontend/src/api/endpoints.js",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "layer_level": 1,
+      "order": 3,
+      "kk_dependent_files": [
+        "frontend/frontend/src/api/client.js",
+        "frontend/frontend/src/api/endpoints.js"
+      ]
+    },
+    {
+      "id": "15a68545-f3f3-4d81-a9b6-a44b7ce5d216",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "异常处理",
+      "description": "exception-handling",
+      "prompt": "创建异常处理体系的详细文档。深入解释 GlobalExceptionHandler 的全局异常拦截和统一响应格式设计。详细说明 BusinessException 的业务异常分类和 ErrorCode 的错误码规范。包含自定义异常的继承层次和错误信息国际化支持。提供异常日志记录和监控告警的实现方案。讨论生产环境的错误追踪和调试方法。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/config/GlobalExceptionHandler.java,backend/backend/src/main/java/com/nlp2sql/common/BusinessException.java,backend/backend/src/main/java/com/nlp2sql/common/ErrorCode.java,backend/backend/src/main/java/com/nlp2sql/model/dto/ApiResponse.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "layer_level": 1,
+      "order": 3,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/config/GlobalExceptionHandler.java",
+        "backend/backend/src/main/java/com/nlp2sql/common/BusinessException.java",
+        "backend/backend/src/main/java/com/nlp2sql/common/ErrorCode.java",
+        "backend/backend/src/main/java/com/nlp2sql/model/dto/ApiResponse.java"
+      ]
+    },
+    {
+      "id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "后端开发指南",
+      "description": "backend-development",
+      "prompt": "创建后端开发指南的全面文档。介绍 Spring Boot 项目的结构和开发规范。详细说明核心模块的实现原理和扩展方法。包含开发环境搭建、代码规范、单元测试编写指南。解释项目的依赖管理和构建流程。提供常见开发任务的参考示例。包含性能优化和安全加固的最佳实践。面向有经验的 Java 开发者提供深入的实现细节和扩展指导。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/,backend/pom.xml,backend/src/main/resources/application.yml",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "order": 3,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/",
+        "backend/pom.xml",
+        "backend/src/main/resources/application.yml"
+      ]
+    },
+    {
+      "id": "989f54f4-b845-4a71-ac3c-8a363bf9c879",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "元数据接口",
+      "description": "metadata-api",
+      "prompt": "创建元数据管理相关的 API 接口文档。详细说明表结构、字段信息的查询接口，包括缓存刷新、增量更新等功能。解释元数据的格式定义和数据结构。包含批量查询和性能优化的接口设计。提供元数据同步和版本管理的机制。包含缓存策略和一致性保证的实现。记录所有 HTTP 端点的 URL 模式、请求方法、请求头、请求体和响应体格式，包括状态码和错误码定义。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/controller/MetadataController.java,backend/backend/src/main/java/com/nlp2sql/service/MetadataService.java,backend/backend/src/main/java/com/nlp2sql/model/TableInfo.java,backend/backend/src/main/java/com/nlp2sql/model/ColumnInfo.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "layer_level": 1,
+      "order": 3,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/controller/MetadataController.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/MetadataService.java",
+        "backend/backend/src/main/java/com/nlp2sql/model/TableInfo.java",
+        "backend/backend/src/main/java/com/nlp2sql/model/ColumnInfo.java"
+      ]
+    },
+    {
+      "id": "ba9ae892-9858-4332-9b11-7efcafc7bdea",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "安全架构",
+      "description": "security-architecture",
+      "prompt": "创建安全架构的详细文档。解释多层安全防护体系的设计，包括身份认证、授权控制、SQL 注入防护、请求验证等。详细说明 JWT 认证机制的实现流程和 Token 管理策略。解释 SQL 安全检查器的三层防御机制和 AST 分析技术。说明访问控制列表、权限模型和安全配置。提供安全威胁分析和防护措施。包含安全审计和监控机制的设计。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/security/JwtAuthenticationFilter.java,backend/backend/src/main/java/com/nlp2sql/security/JwtTokenProvider.java,backend/backend/src/main/java/com/nlp2sql/security/SqlSecurityChecker.java,backend/backend/src/main/java/com/nlp2sql/config/SecurityConfig.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "layer_level": 1,
+      "order": 3,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/security/JwtAuthenticationFilter.java",
+        "backend/backend/src/main/java/com/nlp2sql/security/JwtTokenProvider.java",
+        "backend/backend/src/main/java/com/nlp2sql/security/SqlSecurityChecker.java",
+        "backend/backend/src/main/java/com/nlp2sql/config/SecurityConfig.java"
+      ]
+    },
+    {
+      "id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "前端开发指南",
+      "description": "frontend-development",
+      "prompt": "创建前端开发指南的全面文档。介绍 Vue 3 + Vite 项目的结构和开发规范。详细说明组件架构、状态管理（Pinia）、路由配置。解释 API 客户端封装和错误处理机制。包含开发环境搭建、热重载配置、构建优化。提供常用组件的使用示例和最佳实践。包含样式组织、主题定制和响应式设计指导。面向前端开发者提供深入的组件开发和集成指导。",
+      "progress_status": "completed",
+      "dependent_files": "frontend/frontend/src/,frontend/package.json,frontend/vite.config.js",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "order": 4,
+      "kk_dependent_files": [
+        "frontend/frontend/src/",
+        "frontend/package.json",
+        "frontend/vite.config.js"
+      ]
+    },
+    {
+      "id": "ee386df7-0402-4d93-82bb-b536a5874118",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "扩展点设计",
+      "description": "extension-points",
+      "prompt": "创建扩展点设计的详细文档。解释系统的可扩展性设计和插件化架构。详细说明数据源适配器扩展机制、提示词模板扩展、异常处理器扩展等关键点。提供扩展开发的规范、接口定义和最佳实践。包含具体的扩展示例和集成指南。说明扩展点的生命周期管理和配置方式。讨论向后兼容性和版本管理策略。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/adapter/BaseDataSourceAdapter.java,backend/backend/src/main/java/com/nlp2sql/service/PromptTemplateService.java,backend/backend/src/main/java/com/nlp2sql/config/GlobalExceptionHandler.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "parent_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "layer_level": 1,
+      "order": 4,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/adapter/BaseDataSourceAdapter.java",
+        "backend/backend/src/main/java/com/nlp2sql/service/PromptTemplateService.java",
+        "backend/backend/src/main/java/com/nlp2sql/config/GlobalExceptionHandler.java"
+      ]
+    },
+    {
+      "id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "API 接口文档",
+      "description": "api-reference",
+      "prompt": "创建完整的 RESTful API 接口文档。详细记录所有 HTTP 端点，包括请求方法、URL 模式、请求头、请求体、响应体和状态码。解释认证机制和权限控制。包含请求响应的 JSON 模式定义和字段说明。提供具体的请求示例和响应示例。包含错误码定义和错误处理策略。讨论 API 版本管理和向后兼容性。提供客户端集成示例和最佳实践。",
+      "progress_status": "completed",
+      "dependent_files": "backend/backend/src/main/java/com/nlp2sql/controller/AuthController.java,backend/backend/src/main/java/com/nlp2sql/controller/ChatController.java,backend/backend/src/main/java/com/nlp2sql/controller/DataSourceController.java,backend/backend/src/main/java/com/nlp2sql/controller/MetadataController.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "order": 5,
+      "kk_dependent_files": [
+        "backend/backend/src/main/java/com/nlp2sql/controller/AuthController.java",
+        "backend/backend/src/main/java/com/nlp2sql/controller/ChatController.java",
+        "backend/backend/src/main/java/com/nlp2sql/controller/DataSourceController.java",
+        "backend/backend/src/main/java/com/nlp2sql/controller/MetadataController.java"
+      ]
+    },
+    {
+      "id": "5606600e-ed9a-4f9e-826b-a6a81b009c72",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "数据库设计",
+      "description": "database-design",
+      "prompt": "创建数据库设计的详细文档。详细说明数据库的整体架构和表结构设计。解释实体关系图和主外键约束。包含索引设计和性能优化策略。详细说明业务表和元数据表的结构设计。解释数据迁移脚本的版本管理和回滚机制。包含数据备份恢复和灾难恢复策略。提供数据质量检查和完整性约束的实现。讨论分库分表和水平扩展的方案。",
+      "progress_status": "completed",
+      "dependent_files": "sql/init_backend.sql,sql/sample_data/mysql_sample.sql",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "order": 6,
+      "kk_dependent_files": [
+        "sql/init_backend.sql",
+        "sql/sample_data/mysql_sample.sql"
+      ]
+    },
+    {
+      "id": "73b3e69c-10d9-41e4-97f3-4fdc6895f9e2",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "配置指南",
+      "description": "configuration-guide",
+      "prompt": "创建配置管理的详细文档。详细说明应用配置文件的结构和参数含义。解释环境变量和配置文件的管理策略。包含数据库连接、Redis 缓存、AI 模型等外部服务的配置方法。详细说明开发、测试、生产环境的差异化配置。包含安全配置、CORS、限流等安全相关的设置。提供配置验证和默认值管理的最佳实践。讨论配置的热更新和灰度发布策略。",
+      "progress_status": "completed",
+      "dependent_files": "backend/src/main/resources/application.yml,backend/src/main/resources/application-ollama.yml,frontend/vite.config.js",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "order": 7,
+      "kk_dependent_files": [
+        "backend/src/main/resources/application.yml",
+        "backend/src/main/resources/application-ollama.yml",
+        "frontend/vite.config.js"
+      ]
+    },
+    {
+      "id": "121145f7-751d-4bff-a045-2a8ef5875af8",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "部署指南",
+      "description": "deployment-guide",
+      "prompt": "创建部署运维的详细文档。详细说明开发环境、测试环境、生产环境的部署差异。解释容器化部署（Docker）的配置和编排。包含负载均衡、反向代理、SSL 证书的配置。详细说明监控告警、日志收集、性能分析的集成方案。提供 CI/CD 流水线的配置和自动化部署流程。包含故障排查、性能调优、容量规划的实践经验。讨论高可用架构和灾难恢复策略。",
+      "progress_status": "completed",
+      "dependent_files": "backend/pom.xml,frontend/package.json,backend/src/main/resources/application.yml",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "order": 8,
+      "kk_dependent_files": [
+        "backend/pom.xml",
+        "frontend/package.json",
+        "backend/src/main/resources/application.yml"
+      ]
+    },
+    {
+      "id": "1077c7d7-6021-4d3f-a999-495dee6f400f",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "测试指南",
+      "description": "testing-guide",
+      "prompt": "创建测试策略和测试方法的详细文档。详细说明单元测试、集成测试、端到端测试的编写方法和最佳实践。解释测试框架的选择和配置。包含 Mock 数据和测试数据的准备策略。详细说明 API 测试、数据库测试、前端组件测试的实现方法。提供测试覆盖率的要求和统计方法。包含持续集成中的自动化测试流程。讨论性能测试和压力测试的实施策略。",
+      "progress_status": "completed",
+      "dependent_files": "docs/test_report.md,backend/backend/src/test/backend/src/test/java/backend/src/test/java/com/nlp2sql/",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "order": 9,
+      "kk_dependent_files": [
+        "docs/test_report.md",
+        "backend/backend/src/test/backend/src/test/java/backend/src/test/java/com/nlp2sql/"
+      ]
+    },
+    {
+      "id": "b9585751-99ad-434e-b1f6-e231350d215d",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "name": "故障排查",
+      "description": "troubleshooting",
+      "prompt": "创建故障排查的详细文档。详细说明常见问题的诊断方法和解决方案。包含数据库连接问题、AI 模型调用失败、性能瓶颈等典型问题的排查步骤。解释日志分析和问题定位的方法。详细说明监控指标的解读和告警规则的配置。提供性能调优的参数建议和最佳实践。包含应急预案和故障恢复的操作流程。讨论问题复现和根因分析的方法论。",
+      "progress_status": "completed",
+      "dependent_files": "docs/user_manual.md,backend/backend/src/main/java/com/nlp2sql/config/GlobalExceptionHandler.java",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z",
+      "order": 10,
+      "kk_dependent_files": [
+        "docs/user_manual.md",
+        "backend/backend/src/main/java/com/nlp2sql/config/GlobalExceptionHandler.java"
+      ]
+    }
+  ],
+  "wiki_items": [
+    {
+      "id": "5ce00bd4-6b2f-4703-8bb1-0915546aab37",
+      "catalog_id": "5ce00bd4-6b2f-4703-8bb1-0915546aab37",
+      "title": "适配器模式实现",
+      "description": "adapter-pattern",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "96bcd859-4c58-4abf-b67c-053321ac65d5",
+      "catalog_id": "96bcd859-4c58-4abf-b67c-053321ac65d5",
+      "title": "查询分类器",
+      "description": "query-classification",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "a0bfd093-0542-46b2-b7d3-3f04c5db4c3e",
+      "catalog_id": "a0bfd093-0542-46b2-b7d3-3f04c5db4c3e",
+      "title": "项目概览",
+      "description": "project-overview",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "a724a802-af79-47f7-9320-e0246f54ea59",
+      "catalog_id": "a724a802-af79-47f7-9320-e0246f54ea59",
+      "title": "NL2SQL 引擎",
+      "description": "nl2sql-engine",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "b340fe5c-08b5-4d32-aeea-48225698c526",
+      "catalog_id": "b340fe5c-08b5-4d32-aeea-48225698c526",
+      "title": "表结构设计",
+      "description": "schema-design",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "b71d77d8-5f7f-4dd4-9e4d-5e2fef4f0e61",
+      "catalog_id": "b71d77d8-5f7f-4dd4-9e4d-5e2fef4f0e61",
+      "title": "本地部署",
+      "description": "local-deployment",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "b9dd23ae-9be4-453c-b358-6b0e841ae5bd",
+      "catalog_id": "b9dd23ae-9be4-453c-b358-6b0e841ae5bd",
+      "title": "控制器组件",
+      "description": "controller-components",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "bc4f3c54-1fee-450b-8b47-0299ac29908d",
+      "catalog_id": "bc4f3c54-1fee-450b-8b47-0299ac29908d",
+      "title": "聊天组件",
+      "description": "chat-components",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "c5fa2c2a-4e73-442d-b8b6-5f2c57678e35",
+      "catalog_id": "c5fa2c2a-4e73-442d-b8b6-5f2c57678e35",
+      "title": "架构总览",
+      "description": "architecture-overview",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "d5f78949-63de-46b8-86e7-1111cb98aa05",
+      "catalog_id": "d5f78949-63de-46b8-86e7-1111cb98aa05",
+      "title": "认证接口",
+      "description": "auth-api",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "e0191c37-7ace-4957-b25a-4e36205b20af",
+      "catalog_id": "e0191c37-7ace-4957-b25a-4e36205b20af",
+      "title": "NL2SQL 核心引擎",
+      "description": "nl2sql-engine",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "e17e9873-b505-461e-a7a0-d21011a04f45",
+      "catalog_id": "e17e9873-b505-461e-a7a0-d21011a04f45",
+      "title": "Vue 应用结构",
+      "description": "vue-application-structure",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "05009aa6-5e21-4fd0-95f4-da5718cbd7e3",
+      "catalog_id": "05009aa6-5e21-4fd0-95f4-da5718cbd7e3",
+      "title": "数据展示组件",
+      "description": "data-display-components",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "05e422e6-aba7-4a26-87fa-d31317b3a974",
+      "catalog_id": "05e422e6-aba7-4a26-87fa-d31317b3a974",
+      "title": "组件设计",
+      "description": "component-design",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "1d1b22d4-fbee-4a44-84f7-2bbbc64e1abe",
+      "catalog_id": "1d1b22d4-fbee-4a44-84f7-2bbbc64e1abe",
+      "title": "聊天查询接口",
+      "description": "chat-api",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "2c955894-c572-4c94-9eab-ad2277834a25",
+      "catalog_id": "2c955894-c572-4c94-9eab-ad2277834a25",
+      "title": "快速开始",
+      "description": "getting-started",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "3f420d76-287c-4a0a-bb7b-34fbe9f36f70",
+      "catalog_id": "3f420d76-287c-4a0a-bb7b-34fbe9f36f70",
+      "title": "提示词工程",
+      "description": "prompt-engineering",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "6a7ab1a4-4177-46a2-9cab-b6969fa7fffb",
+      "catalog_id": "6a7ab1a4-4177-46a2-9cab-b6969fa7fffb",
+      "title": "数据迁移",
+      "description": "data-migration",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "6b7e6051-b55d-4b8a-acb2-8670ba03a9e6",
+      "catalog_id": "6b7e6051-b55d-4b8a-acb2-8670ba03a9e6",
+      "title": "服务组件",
+      "description": "service-components",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "a486d5ae-b00e-4abd-acfd-716f1cc61ef6",
+      "catalog_id": "a486d5ae-b00e-4abd-acfd-716f1cc61ef6",
+      "title": "提示词系统",
+      "description": "prompt-system",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "c04ca4a6-fe6b-4444-a5b8-464bb2524edb",
+      "catalog_id": "c04ca4a6-fe6b-4444-a5b8-464bb2524edb",
+      "title": "生产部署",
+      "description": "production-deployment",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "d35385c0-dfd2-48ec-aa2a-b076fdbde6e1",
+      "catalog_id": "d35385c0-dfd2-48ec-aa2a-b076fdbde6e1",
+      "title": "工厂与注册机制",
+      "description": "factory-registration",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "dbbb20ec-45db-45bf-a71b-ff334362d0a6",
+      "catalog_id": "dbbb20ec-45db-45bf-a71b-ff334362d0a6",
+      "title": "状态管理",
+      "description": "state-management",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "e8a54c8f-7d06-4087-b478-e041bfd1594b",
+      "catalog_id": "e8a54c8f-7d06-4087-b478-e041bfd1594b",
+      "title": "数据源适配器",
+      "description": "data-source-adapters",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "000963d9-087a-4d9b-8982-2147c2b33ca3",
+      "catalog_id": "000963d9-087a-4d9b-8982-2147c2b33ca3",
+      "title": "数据管理服务",
+      "description": "data-management-services",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "33a7c711-c107-4296-85de-73d633b01b4d",
+      "catalog_id": "33a7c711-c107-4296-85de-73d633b01b4d",
+      "title": "数据源接口",
+      "description": "datasource-api",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "4ec37381-2cf4-4609-a5f3-c5d29927a2e3",
+      "catalog_id": "4ec37381-2cf4-4609-a5f3-c5d29927a2e3",
+      "title": "适配器组件",
+      "description": "adapter-components",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "6d860ad6-71d8-42ae-84e0-9811ee1001f2",
+      "catalog_id": "6d860ad6-71d8-42ae-84e0-9811ee1001f2",
+      "title": "数据访问层",
+      "description": "database-layer",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "catalog_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "title": "系统架构",
+      "description": "system-architecture",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "a74c8d1c-503a-4cb6-b082-cf7b60bb3d0d",
+      "catalog_id": "a74c8d1c-503a-4cb6-b082-cf7b60bb3d0d",
+      "title": "核心组件",
+      "description": "core-components",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "e0f5a8ea-4d66-404f-a481-71b74b116c18",
+      "catalog_id": "e0f5a8ea-4d66-404f-a481-71b74b116c18",
+      "title": "数据流设计",
+      "description": "data-flow-design",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "e5a12c62-3da5-41ce-a551-64515955b28f",
+      "catalog_id": "e5a12c62-3da5-41ce-a551-64515955b28f",
+      "title": "模型集成",
+      "description": "model-integration",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "002e400e-f9dd-4cf1-aac3-155890e02e6b",
+      "catalog_id": "002e400e-f9dd-4cf1-aac3-155890e02e6b",
+      "title": "API 集成",
+      "description": "api-integration",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "15a68545-f3f3-4d81-a9b6-a44b7ce5d216",
+      "catalog_id": "15a68545-f3f3-4d81-a9b6-a44b7ce5d216",
+      "title": "异常处理",
+      "description": "exception-handling",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "catalog_id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "title": "后端开发指南",
+      "description": "backend-development",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "989f54f4-b845-4a71-ac3c-8a363bf9c879",
+      "catalog_id": "989f54f4-b845-4a71-ac3c-8a363bf9c879",
+      "title": "元数据接口",
+      "description": "metadata-api",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "ba9ae892-9858-4332-9b11-7efcafc7bdea",
+      "catalog_id": "ba9ae892-9858-4332-9b11-7efcafc7bdea",
+      "title": "安全架构",
+      "description": "security-architecture",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "catalog_id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "title": "前端开发指南",
+      "description": "frontend-development",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "ee386df7-0402-4d93-82bb-b536a5874118",
+      "catalog_id": "ee386df7-0402-4d93-82bb-b536a5874118",
+      "title": "扩展点设计",
+      "description": "extension-points",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "catalog_id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "title": "API 接口文档",
+      "description": "api-reference",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "5606600e-ed9a-4f9e-826b-a6a81b009c72",
+      "catalog_id": "5606600e-ed9a-4f9e-826b-a6a81b009c72",
+      "title": "数据库设计",
+      "description": "database-design",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "73b3e69c-10d9-41e4-97f3-4fdc6895f9e2",
+      "catalog_id": "73b3e69c-10d9-41e4-97f3-4fdc6895f9e2",
+      "title": "配置指南",
+      "description": "configuration-guide",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "121145f7-751d-4bff-a045-2a8ef5875af8",
+      "catalog_id": "121145f7-751d-4bff-a045-2a8ef5875af8",
+      "title": "部署指南",
+      "description": "deployment-guide",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "1077c7d7-6021-4d3f-a999-495dee6f400f",
+      "catalog_id": "1077c7d7-6021-4d3f-a999-495dee6f400f",
+      "title": "测试指南",
+      "description": "testing-guide",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": "b9585751-99ad-434e-b1f6-e231350d215d",
+      "catalog_id": "b9585751-99ad-434e-b1f6-e231350d215d",
+      "title": "故障排查",
+      "description": "troubleshooting",
+      "extend": "{}",
+      "progress_status": "completed",
+      "repo_id": "3d2d70d3-9940-1524-6192-cbb8e7012b04",
+      "reference_count": 0,
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    }
+  ],
+  "knowledge_relations": [
+    {
+      "id": 1,
+      "source_id": "e8a54c8f-7d06-4087-b478-e041bfd1594b",
+      "target_id": "5ce00bd4-6b2f-4703-8bb1-0915546aab37",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 2,
+      "source_id": "e0191c37-7ace-4957-b25a-4e36205b20af",
+      "target_id": "96bcd859-4c58-4abf-b67c-053321ac65d5",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 3,
+      "source_id": "6b7e6051-b55d-4b8a-acb2-8670ba03a9e6",
+      "target_id": "a724a802-af79-47f7-9320-e0246f54ea59",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 4,
+      "source_id": "5606600e-ed9a-4f9e-826b-a6a81b009c72",
+      "target_id": "b340fe5c-08b5-4d32-aeea-48225698c526",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 5,
+      "source_id": "121145f7-751d-4bff-a045-2a8ef5875af8",
+      "target_id": "b71d77d8-5f7f-4dd4-9e4d-5e2fef4f0e61",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 6,
+      "source_id": "05e422e6-aba7-4a26-87fa-d31317b3a974",
+      "target_id": "b9dd23ae-9be4-453c-b358-6b0e841ae5bd",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 7,
+      "source_id": "a74c8d1c-503a-4cb6-b082-cf7b60bb3d0d",
+      "target_id": "bc4f3c54-1fee-450b-8b47-0299ac29908d",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 8,
+      "source_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "target_id": "c5fa2c2a-4e73-442d-b8b6-5f2c57678e35",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 9,
+      "source_id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "target_id": "d5f78949-63de-46b8-86e7-1111cb98aa05",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 10,
+      "source_id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "target_id": "e0191c37-7ace-4957-b25a-4e36205b20af",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 11,
+      "source_id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "target_id": "e17e9873-b505-461e-a7a0-d21011a04f45",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 12,
+      "source_id": "a74c8d1c-503a-4cb6-b082-cf7b60bb3d0d",
+      "target_id": "05009aa6-5e21-4fd0-95f4-da5718cbd7e3",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 13,
+      "source_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "target_id": "05e422e6-aba7-4a26-87fa-d31317b3a974",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 14,
+      "source_id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "target_id": "1d1b22d4-fbee-4a44-84f7-2bbbc64e1abe",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 15,
+      "source_id": "e0191c37-7ace-4957-b25a-4e36205b20af",
+      "target_id": "3f420d76-287c-4a0a-bb7b-34fbe9f36f70",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 16,
+      "source_id": "5606600e-ed9a-4f9e-826b-a6a81b009c72",
+      "target_id": "6a7ab1a4-4177-46a2-9cab-b6969fa7fffb",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 17,
+      "source_id": "05e422e6-aba7-4a26-87fa-d31317b3a974",
+      "target_id": "6b7e6051-b55d-4b8a-acb2-8670ba03a9e6",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 18,
+      "source_id": "6b7e6051-b55d-4b8a-acb2-8670ba03a9e6",
+      "target_id": "a486d5ae-b00e-4abd-acfd-716f1cc61ef6",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 19,
+      "source_id": "121145f7-751d-4bff-a045-2a8ef5875af8",
+      "target_id": "c04ca4a6-fe6b-4444-a5b8-464bb2524edb",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 20,
+      "source_id": "e8a54c8f-7d06-4087-b478-e041bfd1594b",
+      "target_id": "d35385c0-dfd2-48ec-aa2a-b076fdbde6e1",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 21,
+      "source_id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "target_id": "dbbb20ec-45db-45bf-a71b-ff334362d0a6",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 22,
+      "source_id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "target_id": "e8a54c8f-7d06-4087-b478-e041bfd1594b",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 23,
+      "source_id": "6b7e6051-b55d-4b8a-acb2-8670ba03a9e6",
+      "target_id": "000963d9-087a-4d9b-8982-2147c2b33ca3",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 24,
+      "source_id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "target_id": "33a7c711-c107-4296-85de-73d633b01b4d",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 25,
+      "source_id": "05e422e6-aba7-4a26-87fa-d31317b3a974",
+      "target_id": "4ec37381-2cf4-4609-a5f3-c5d29927a2e3",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 26,
+      "source_id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "target_id": "6d860ad6-71d8-42ae-84e0-9811ee1001f2",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 27,
+      "source_id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "target_id": "a74c8d1c-503a-4cb6-b082-cf7b60bb3d0d",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 28,
+      "source_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "target_id": "e0f5a8ea-4d66-404f-a481-71b74b116c18",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 29,
+      "source_id": "e0191c37-7ace-4957-b25a-4e36205b20af",
+      "target_id": "e5a12c62-3da5-41ce-a551-64515955b28f",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 30,
+      "source_id": "db6e9d0d-a21c-4c0c-be16-9ae105c1ce2e",
+      "target_id": "002e400e-f9dd-4cf1-aac3-155890e02e6b",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 31,
+      "source_id": "95576bb2-6607-43ef-85f8-ade4fbbfe8bb",
+      "target_id": "15a68545-f3f3-4d81-a9b6-a44b7ce5d216",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 32,
+      "source_id": "0c3364a4-9452-4b5c-a467-1a385fbd0c35",
+      "target_id": "989f54f4-b845-4a71-ac3c-8a363bf9c879",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 33,
+      "source_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "target_id": "ba9ae892-9858-4332-9b11-7efcafc7bdea",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    },
+    {
+      "id": 34,
+      "source_id": "76005d8c-219c-40bc-9a6a-afe6e63db2fa",
+      "target_id": "ee386df7-0402-4d93-82bb-b536a5874118",
+      "source_type": "WIKI_ITEM",
+      "target_type": "WIKI_ITEM",
+      "relationship_type": "PARENT_CHILD",
+      "gmt_create": "2026-09-29T03:52:55Z",
+      "gmt_modified": "2026-09-29T03:52:55Z"
+    }
+  ]
+}
