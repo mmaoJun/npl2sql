@@ -9,12 +9,35 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Schema 压缩服务。
+ *
+ * <p>根据用户查询对表结构进行相关性过滤和多级压缩，控制 Prompt 中的 Schema Token 数量。
+ * 压缩策略：
+ * <ul>
+ *   <li>L0：按查询关键词过滤相关表，最多保留 15 张</li>
+ *   <li>L1：完整格式（列名 + 类型 + 注释），适用于 Token 预算内</li>
+ *   <li>L2：精简格式（仅列名），适用于 Token 超预算时降级</li>
+ * </ul>
+ * Token 预算默认 800。
+ *
+ * @see PromptBuilder
+ */
 @Service
 public class SchemaCompressor {
 
     private static final int TOKEN_BUDGET = 800;
     private static final int AVG_CHARS_PER_TOKEN = 2;
 
+    /**
+     * 压缩 Schema 信息，使其适配 LLM Token 预算。
+     *
+     * <p>先按用户查询过滤相关表，再根据估算 Token 数选择 L1 或 L2 格式输出。
+     *
+     * @param tables    数据源的完整表结构列表
+     * @param userQuery 用户自然语言输入，用于相关性过滤
+     * @return 压缩后的 Schema 文本
+     */
     public String compress(List<TableInfo> tables, String userQuery) {
         if (tables == null || tables.isEmpty()) {
             return "无可用表结构";

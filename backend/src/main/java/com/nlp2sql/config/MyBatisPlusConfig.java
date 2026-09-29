@@ -10,9 +10,20 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDateTime;
 
+/**
+ * MyBatis-Plus 配置。
+ *
+ * <p>注册 MySQL 分页插件和自动填充处理器，
+ * 插入时自动填充 {@code createdAt}/{@code updatedAt}，更新时自动填充 {@code updatedAt}。
+ */
 @Configuration
 public class MyBatisPlusConfig {
 
+    /**
+     * 注册 MyBatis-Plus 分页拦截器（MySQL 方言）。
+     *
+     * @return 分页拦截器
+     */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
@@ -20,6 +31,11 @@ public class MyBatisPlusConfig {
         return interceptor;
     }
 
+    /**
+     * 自动填充处理器，插入/更新时自动设置时间字段。
+     *
+     * @return 元对象处理器
+     */
     @Bean
     public MetaObjectHandler metaObjectHandler() {
         return new MetaObjectHandler() {

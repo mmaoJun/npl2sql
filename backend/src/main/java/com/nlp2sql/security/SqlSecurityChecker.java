@@ -11,6 +11,19 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+/**
+ * SQL 安全校验器。
+ *
+ * <p>三层防御机制：
+ * <ul>
+ *   <li>L1 — 关键词黑名单：拒绝 INSERT/UPDATE/DELETE/DROP 等危险操作</li>
+ *   <li>L2 — AST 分析：使用 JSqlParser 验证语句必须是 SELECT</li>
+ *   <li>L3 — 注入模式检测：拦截堆叠查询和 UNION 注入</li>
+ * </ul>
+ * 另提供 {@link #enforceLimit} 方法强制添加 LIMIT 子句。
+ *
+ * @see com.nlp2sql.service.NL2SQLEngine
+ */
 @Component
 public class SqlSecurityChecker {
 
@@ -26,6 +39,14 @@ public class SqlSecurityChecker {
     private static final Pattern COMMENT_INJECTION = Pattern.compile("(/\\*|--|#)");
     private static final Pattern UNION_INJECTION = Pattern.compile("\\bUNION\\b\\s+(ALL\\s+)?\\bSELECT\\b", Pattern.CASE_INSENSITIVE);
 
+    /**
+     * 校验 SQL 安全性。
+     *
+     * <p>依次执行关键词黑名单、AST 类型验证和注入模式检测，任一失败即返回失败结果。
+     *
+     * @param sql 待校验的 SQL 语句
+     * @return 校验结果，包含是否通过和错误消息
+     */
     public ValidationResult validate(String sql) {
         if (sql == null || sql.isBlank()) {
             return ValidationResult.fail("SQL 不能为空");
@@ -65,6 +86,15 @@ public class SqlSecurityChecker {
         return ValidationResult.ok();
     }
 
+    /**
+     * 强制为 SQL 添加 LIMIT 子句，防止全表扫描。
+     *
+     * <p>去除末尾分号后，若 SQL 中无 LIMIT 关键字则追加 {@code LIMIT maxLimit}。
+     *
+     * @param sql      待处理的 SQL
+     * @param maxLimit 最大返回行数
+     * @return 处理后的 SQL
+     */
     public String enforceLimit(String sql, int maxLimit) {
         String cleaned = sql.trim();
         if (cleaned.endsWith(";")) {
@@ -77,10 +107,19 @@ public class SqlSecurityChecker {
         return cleaned;
     }
 
+    /**
+     * SQL 校验结果。
+     *
+     * @param valid        是否通过校验
+     * @param errorMessage 校验失败时的错误消息，通过时为 null
+     */
     public record ValidationResult(boolean valid, String errorMessage) {
+
+        /** 校验通过。 */
         public static ValidationResult ok() {
             return new ValidationResult(true, null);
         }
+        /** 校验失败。 */
         public static ValidationResult fail(String message) {
             return new ValidationResult(false, message);
         }

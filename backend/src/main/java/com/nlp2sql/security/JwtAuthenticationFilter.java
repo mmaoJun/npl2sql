@@ -14,6 +14,16 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * JWT 认证过滤器。
+ *
+ * <p>从 {@code Authorization: Bearer <token>} 请求头提取 JWT，
+ * 校验通过后构建 {@link UsernamePasswordAuthenticationToken} 写入 SecurityContext。
+ * 无 Token 或 Token 无效时不设置认证信息，由 Spring Security 后续拦截。
+ *
+ * @see JwtTokenProvider
+ * @see SecurityConfig
+ */
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -23,6 +33,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         this.tokenProvider = tokenProvider;
     }
 
+    /**
+     * 提取并校验 Token，设置 Spring Security 认证上下文。
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                      HttpServletResponse response,
@@ -41,6 +54,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    /**
+     * 从 Authorization 请求头中提取 Bearer Token。
+     *
+     * @param request HTTP 请求
+     * @return Token 字符串；不存在或格式不匹配时返回 null
+     */
     private String extractToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
