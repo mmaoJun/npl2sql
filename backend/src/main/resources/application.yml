@@ -38,6 +38,29 @@ spring:
     time-zone: Asia/Shanghai
     default-property-inclusion: non_null
 
+  # Spring AI - 模型配置
+  # 默认使用 Ollama 本地模型, 切换为 DashScope (通义千问云端) 请修改 profiles.active 并设置 DASHSCOPE_API_KEY
+  profiles:
+    active: dashscope
+
+  ai:
+    # DashScope (阿里云百炼 / 通义千问) - 激活 profile: dashscope
+    dashscope:
+      api-key: ${DASHSCOPE_API_KEY:}
+      chat:
+        options:
+          model: ${nlp2sql.model.dashscope-model}
+          temperature: 0
+
+    # Ollama (本地模型) - 激活 profile: ollama
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: ${nlp2sql.model.ollama-model}
+          temperature: 0
+          num-ctx: 4096
+
 # MyBatis-Plus
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
@@ -57,13 +80,12 @@ jwt:
   secret: nlp2sql-jwt-secret-key-2024-must-be-at-least-256-bits-long-for-hs256
   expiration: 86400000  # 24小时
 
-# Ollama 模型配置
-ollama:
-  base-url: http://localhost:11434
-  model: qwen2.5-coder:7b
-  temperature: 0
-  num-ctx: 4096
-  timeout: 60
+# 模型选择配置（模型名统一在此处管理，spring.ai.* 通过属性引用读取）
+nlp2sql:
+  model:
+    provider: dashscope                    # dashscope | ollama
+    dashscope-model: qwen-plus            # DashScope 模型: qwen-plus, qwen-turbo, qwen-max, qwen2.5-coder-plus 等
+    ollama-model: qwen2.5-coder:7b      # Ollama 模型
 
 # SQL 安全配置
 sql-security:
@@ -92,4 +114,4 @@ logging:
     com.nlp2sql: DEBUG
     org.springframework.security: INFO
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] [%X{traceId}] %-5level %logger{36} - %msg%n"

@@ -1,110 +1,80 @@
 package com.nlp2sql.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nlp2sql.config.OllamaConfig;
-import okhttp3.*;
-import okhttp3.sse.EventSource;
-import okhttp3.sse.EventSourceListener;
-import okhttp3.sse.EventSources;
+import com.nlp2sql.config.ModelProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
-import java.io.IOException;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
-
+/**
+ * SQL 生成服务。
+ *
+ * <p>通过 Spring AI {@link ChatModel} 调用大语言模型，将 Prompt 转换为 SQL。
+ * 支持同步生成和流式输出两种模式，并提供模型原始输出到纯 SQL 的提取能力。
+ *
+ * @see ModelProperties
+ * @see ChatModel
+ */
 @Service
 public class SQLGenerator {
 
     private static final Logger log = LoggerFactory.getLogger(SQLGenerator.class);
 
-    private final OkHttpClient ollamaClient;
-    private final OllamaConfig ollamaConfig;
-    private final ObjectMapper objectMapper;
+    private final ChatModel chatModel;
+    private final ModelProperties modelProperties;
 
-    public SQLGenerator(OkHttpClient ollamaClient, OllamaConfig ollamaConfig) {
-        this.ollamaClient = ollamaClient;
-        this.ollamaConfig = ollamaConfig;
-        this.objectMapper = new ObjectMapper();
+    public SQLGenerator(ChatModel chatModel, ModelProperties modelProperties) {
+        this.chatModel = chatModel;
+        this.modelProperties = modelProperties;
     }
 
-    public String generate(String prompt) throws IOException {
-        String json = objectMapper.createObjectNode()
-                .put("model", ollamaConfig.getModel())
-                .put("prompt", prompt)
-                .put("stream", false)
-                .put("temperature", ollamaConfig.getTemperature())
-                .set("options", objectMapper.createObjectNode()
-                        .put("num_ctx", ollamaConfig.getNumCtx()))
-                .toString();
+    /**
+     * 同步生成 SQL。
+     *
+     * <p>调用大语言模型生成 SQL，自动提取 Markdown 代码块和分号。
+     *
+     * @param prompt 包含系统指令和用户消息的结构化 Prompt
+     * @return 提取后的纯 SQL 字符串
+     */
+    public String generate(Prompt prompt) {
+        log.debug("使用模型 [{}] 生成 SQL, provider={}", modelProperties.getActiveModelName(), modelProperties.getProvider());
 
-        RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
-        Request request = new Request.Builder()
-                .url(ollamaConfig.getBaseUrl() + "/api/generate")
-                .post(body)
-                .build();
+        ChatResponse response = chatModel.call(prompt);
 
-        try (Response response = ollamaClient.newCall(request).execute()) {
-            if (!response.isSuccessful()) {
-                throw new IOException("Ollama API 调用失败: " + response.code());
-            }
-            String responseBody = response.body().string();
-            JsonNode result = objectMapper.readTree(responseBody);
-            String rawOutput = result.get("response").asText();
-            return extractSql(rawOutput);
-        }
+        String rawOutput = response.getResult().getOutput().getText();
+        return extractSql(rawOutput);
     }
 
-    public void generateStream(String prompt, Consumer<String> onToken, Runnable onComplete) {
-        String json;
-        try {
-            json = objectMapper.createObjectNode()
-                    .put("model", ollamaConfig.getModel())
-                    .put("prompt", prompt)
-                    .put("stream", true)
-                    .put("temperature", ollamaConfig.getTemperature())
-                    .set("options", objectMapper.createObjectNode()
-                            .put("num_ctx", ollamaConfig.getNumCtx()))
-                    .toString();
-        } catch (Exception e) {
-            throw new RuntimeException("构建请求失败", e);
-        }
-
-        RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
-        Request request = new Request.Builder()
-                .url(ollamaConfig.getBaseUrl() + "/api/generate")
-                .post(body)
-                .build();
-
-        EventSource.Factory factory = EventSources.createFactory(ollamaClient);
-        factory.newEventSource(request, new EventSourceListener() {
-            @Override
-            public void onEvent(EventSource eventSource, String id, String type, String data) {
-                try {
-                    JsonNode node = objectMapper.readTree(data);
-                    String token = node.get("response").asText("");
-                    boolean done = node.has("done") && node.get("done").asBoolean();
-                    if (!token.isEmpty()) {
-                        onToken.accept(token);
+    /**
+     * 流式生成 SQL。
+     *
+     * <p>以 Reactive Stream 方式逐 Token 返回模型输出，适用于 SSE 流式响应场景。
+     *
+     * @param prompt 包含系统指令和用户消息的结构化 Prompt
+     * @return 逐 Token 输出的文本流
+     */
+    public Flux<String> generateStream(Prompt prompt) {
+        return chatModel.stream(prompt)
+                .map(chatResponse -> {
+                    if (chatResponse.getResult() != null && chatResponse.getResult().getOutput().getText() != null) {
+                        return chatResponse.getResult().getOutput().getText();
                     }
-                    if (done) {
-                        onComplete.run();
-                    }
-                } catch (Exception e) {
-                    log.error("解析流式响应失败: {}", e.getMessage());
-                }
-            }
-
-            @Override
-            public void onFailure(EventSource eventSource, Throwable t, Response response) {
-                log.error("流式调用失败: {}", t != null ? t.getMessage() : "unknown");
-                onComplete.run();
-            }
-        });
+                    return "";
+                })
+                .filter(token -> !token.isEmpty());
     }
 
+    /**
+     * 从模型原始输出中提取纯 SQL。
+     *
+     * <p>处理三种常见情况：Markdown 代码块包裹（```sql ... ```）、末尾分号、前后空白。
+     *
+     * @param rawOutput 模型返回的原始文本
+     * @return 提取后的纯 SQL；输入为空时返回空字符串
+     */
     public String extractSql(String rawOutput) {
         if (rawOutput == null || rawOutput.isBlank()) {
             return "";
@@ -112,7 +82,6 @@ public class SQLGenerator {
 
         String sql = rawOutput.trim();
 
-        // 去除 markdown 代码块
         if (sql.startsWith("```")) {
             int firstNewline = sql.indexOf('\n');
             if (firstNewline > 0) {
@@ -125,7 +94,6 @@ public class SQLGenerator {
             sql = sql.trim();
         }
 
-        // 提取第一个完整的 SQL 语句（去除分号）
         int semicolonIdx = sql.indexOf(';');
         if (semicolonIdx > 0) {
             sql = sql.substring(0, semicolonIdx);
