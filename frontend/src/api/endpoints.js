@@ -14,6 +14,7 @@ export const refreshMetadata = (datasourceId) => client.post('/metadata/refresh'
 
 // 数据源管理
 export const getDataSources = () => client.get('/datasources')
+export const getSupportedTypes = () => client.get('/datasources/supported-types')
 export const createDataSource = (data) => client.post('/datasources', data)
 export const updateDataSource = (id, data) => client.put(`/datasources/${id}`, data)
 export const deleteDataSource = (id) => client.delete(`/datasources/${id}`)
