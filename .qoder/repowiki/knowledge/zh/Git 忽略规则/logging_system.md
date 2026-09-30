@@ -1,6 +1,6 @@
 ## 1. 使用的框架与工具
 
-后端采用 **SLF4J + Logback**（Spring Boot 默认绑定）作为日志门面，通过 `org.slf4j.LoggerFactory` 获取 Logger 实例；MyBatis-Plus 的 SQL 输出通过 `log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl` 桥接到 SLF4J。前端使用浏览器原生 `console.log`，Python 测试脚本使用 `print`，无专用日志库。
+后端采用 **SLF4J + Logback**（Spring Boot 默认绑定）作为日志门面，Logger 实例由 Lombok `@Slf4j` 注解生成；SLF4J 本身未显式声明依赖，由 `spring-boot-starter-web` 传递引入。MyBatis-Plus 的 SQL 输出通过 `log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl` 桥接到 SLF4J。前端使用浏览器原生 `console.log`，Python 测试脚本使用 `print`，无专用日志库。
 
 ## 2. 关键文件
 
@@ -13,11 +13,16 @@
 ## 3. 架构与约定
 
 ### 3.1 Logger 初始化模式
-所有 Java 类统一使用静态字段 + `LoggerFactory.getLogger(ClassName.class)` 的方式获取 logger，例如：
+所有需要日志的 Java 类统一在类上标注 Lombok `@Slf4j`，由注解处理器生成 `private static final org.slf4j.Logger log` 字段，类内直接以 `log.info(...)` 使用：
 ```java
-private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class NL2SQLEngine { ... }
 ```
-未发现 Lombok `@Slf4j` 的使用痕迹，也未见自定义 Logger 工厂或 AOP 切面。
+不再手写 `LoggerFactory.getLogger(XXX.class)`，也不 import `org.slf4j.Logger`。未见自定义 Logger 工厂或 AOP 切面。
+
+注意继承场景：`@Slf4j` 生成的字段是 `private` 的，子类看不到父类的 `log`。因此 `JdbcDataSourceAdapter` 与其子类 `MySQLAdapter` 各自标注 `@Slf4j`（改造前基类用的是 `protected static final Logger`，子类日志会以基类名输出）。
 
 ### 3.2 日志级别使用
 - `info`：正常流程节点（如 `NL2SQLEngine` 中“SQL 校验失败，第 X 次重试”）
@@ -39,7 +44,7 @@ console 输出 pattern 中包含 `%X{traceId}`，说明期望通过 MDC 注入 t
 
 ## 4. 约定与约束
 
-- **Logger 获取方式**：所有使用日志的类均通过 `LoggerFactory.getLogger(XXX.class)` 静态字段持有 logger（由 11 个 Java 文件中的用法一致推断为项目内约定）。
+- **Logger 获取方式**：所有使用日志的类均在类上标注 `@Slf4j`，不手写 logger 字段、不 import `org.slf4j.Logger` / `LoggerFactory`（`TraceIdFilter` 只用 `org.slf4j.MDC`，不受此约束）。
 - **日志级别规范**：业务异常用 `warn`，不可恢复错误用 `error`，常规流程节点用 `info`（依据现有调用分布观察到的模式）。
 - **TraceId 关联**：日志 pattern 强制要求 `%X{traceId}` 存在，依赖 `TraceIdFilter` 在 MDC 中填充该字段，否则日志行中 traceId 为空。
 - **MyBatis-Plus SQL 日志**：通过 `configuration.log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl` 接入 SLF4J，可在 `application.yml` 中按包调整 SQL 输出级别。

@@ -1,7 +1,6 @@
 package com.nlp2sql.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -21,9 +20,8 @@ import java.util.Map;
  * @see ModelProperties
  */
 @org.springframework.context.annotation.Configuration
+@Slf4j
 public class ChatModelPrimarySelector implements BeanDefinitionRegistryPostProcessor, EnvironmentAware {
-
-    private static final Logger log = LoggerFactory.getLogger(ChatModelPrimarySelector.class);
 
     private static final Map<String, String> PROVIDER_BEAN_MAP = Map.of(
             "dashscope", "dashscopeChatModel",

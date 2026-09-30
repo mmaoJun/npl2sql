@@ -11,8 +11,7 @@ import com.nlp2sql.model.dto.ChatResponse;
 import com.nlp2sql.model.dto.QueryResult;
 import com.nlp2sql.security.SqlSecurityChecker;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -33,9 +32,8 @@ import java.util.*;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class NL2SQLEngine {
-
-    private static final Logger log = LoggerFactory.getLogger(NL2SQLEngine.class);
 
     private final PromptBuilder promptBuilder;
     private final SQLGenerator sqlGenerator;

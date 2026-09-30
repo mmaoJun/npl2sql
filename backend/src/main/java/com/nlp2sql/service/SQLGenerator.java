@@ -1,8 +1,7 @@
 package com.nlp2sql.service;
 
 import com.nlp2sql.config.ModelProperties;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -19,9 +18,8 @@ import reactor.core.publisher.Flux;
  * @see ChatModel
  */
 @Service
+@Slf4j
 public class SQLGenerator {
-
-    private static final Logger log = LoggerFactory.getLogger(SQLGenerator.class);
 
     private final ChatModel chatModel;
     private final ModelProperties modelProperties;

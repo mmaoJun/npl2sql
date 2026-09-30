@@ -6,8 +6,7 @@ import com.nlp2sql.model.TableInfo;
 import com.nlp2sql.adapter.DataSourceAdapter;
 import com.nlp2sql.adapter.DataSourceFactory;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -28,9 +27,9 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MetadataService {
 
-    private static final Logger log = LoggerFactory.getLogger(MetadataService.class);
     private static final String SCHEMA_CACHE_PREFIX = "schema:";
 
     private final RedisTemplate<String, Object> redisTemplate;

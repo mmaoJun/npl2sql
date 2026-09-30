@@ -6,8 +6,7 @@ import com.nlp2sql.model.TableInfo;
 import com.nlp2sql.model.dto.QueryResult;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -34,9 +33,9 @@ import java.util.Set;
  *
  * @see DataSourceAdapter
  */
+@Slf4j
 public abstract class JdbcDataSourceAdapter implements DataSourceAdapter {
 
-    protected static final Logger log = LoggerFactory.getLogger(JdbcDataSourceAdapter.class);
     /** 连接池最大连接数 */
     private static final int MAX_POOL_SIZE = 5;
     /** 获取连接超时（毫秒） */

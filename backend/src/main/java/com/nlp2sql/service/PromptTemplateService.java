@@ -1,7 +1,6 @@
 package com.nlp2sql.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -25,9 +24,8 @@ import java.util.*;
  * @see PromptBuilder
  */
 @Service
+@Slf4j
 public class PromptTemplateService {
-
-    private static final Logger log = LoggerFactory.getLogger(PromptTemplateService.class);
 
     @Value("${prompt.version:v1}")
     private String promptVersion;

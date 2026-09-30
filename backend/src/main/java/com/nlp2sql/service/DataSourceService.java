@@ -9,8 +9,7 @@ import com.nlp2sql.model.DataSource;
 import com.nlp2sql.model.dto.DataSourceDTO;
 import com.nlp2sql.model.vo.DataSourceVO;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,9 +25,8 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class DataSourceService {
-
-    private static final Logger log = LoggerFactory.getLogger(DataSourceService.class);
 
     private final DataSourceMapper dataSourceMapper;
     private final DataSourceFactory dataSourceFactory;

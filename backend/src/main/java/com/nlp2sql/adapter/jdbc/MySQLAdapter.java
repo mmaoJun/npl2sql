@@ -2,6 +2,7 @@ package com.nlp2sql.adapter.jdbc;
 
 import com.nlp2sql.model.ColumnInfo;
 import com.nlp2sql.model.TableInfo;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,6 +22,7 @@ import java.util.Map;
  *
  * @see JdbcDataSourceAdapter
  */
+@Slf4j
 public class MySQLAdapter extends JdbcDataSourceAdapter {
 
     /** {@inheritDoc} */
